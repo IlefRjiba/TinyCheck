@@ -1,0 +1,29 @@
+<mwl-demo-utils-calendar-header style="margin: 20px;" [(view)]="view" [(viewDate)]="viewDate">
+</mwl-demo-utils-calendar-header>
+
+<div class="alert alert-info">
+  <div [ngSwitch]="view">
+    <span *ngSwitchCase="'month'"
+      >Click on a date label to change the view to that date.</span
+    >
+    <span *ngSwitchCase="'day'">Click on an hour label to make an appointment</span>
+  </div>
+</div>
+
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="'month'"
+    [viewDate]="viewDate"
+    [events]="events"
+    (dayClicked)="changeDay($event.day.date)"
+  >
+  </mwl-calendar-month-view>
+  
+  <mwl-calendar-day-view
+    *ngSwitchCase="'day'"
+    [viewDate]="viewDate"
+    [events]="events"
+    (hourSegmentClicked)="hourSelected($event.date)"
+  >
+  </mwl-calendar-day-view>
+</div>
