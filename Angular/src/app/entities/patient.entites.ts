@@ -12,10 +12,10 @@ export class Patient {
       public babyage = '',
       public babypoid =0,
       public Reason = '',
-      public patient = Patient,
-      public appointments: Appointment[],
-      public medicalRecord: MedicalRecord,
-      public user: User[]
+      // public patient = Patient,
+      // public appointments: Appointment[],
+      // public medicalRecord: MedicalRecord,
+      // public user: User[]
     ) {}
   }
 

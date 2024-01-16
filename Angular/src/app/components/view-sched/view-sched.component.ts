@@ -1,6 +1,6 @@
-import { UserService } from '../services/user/user.service';
-import { User } from '../entities/users.entity';
-import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
+import { User } from '../../entities/users.entity';
+import { ActivatedRoute, Router } from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {FlatpickrModule} from 'angularx-flatpickr';
   import {
@@ -21,7 +21,7 @@ import {FlatpickrModule} from 'angularx-flatpickr';
     CalendarView,
   } from 'angular-calendar';
   import { EventColor } from 'calendar-utils';
-  import { CalendarService } from '../services/calendar/calendar.service';
+  import { CalendarService } from '../../services/calendar/calendar.service';
   
   const colors: Record<string, EventColor> = {
     red: {
@@ -58,10 +58,15 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 
 export class ViewSchedComponent {
 
+  constructor(private calendarService : CalendarService , private router : Router ){
+    this.events=this.calendarService.events
+  }
+
   hourSelected(arg0: Date) {
       this.calendarService.chosenDate = arg0;
       console.log(this.calendarService.chosenDate)
-      
+      this.calendarService.updateTime()
+      this.router.navigate(['/schedule']);
   }
 
   selectedDate ?: Date
@@ -77,7 +82,5 @@ export class ViewSchedComponent {
     this.calendarService.chosenDate = date;
     console.log(this.calendarService.chosenDate)
   }
-  constructor(private calendarService : CalendarService ){
-    this.events=this.calendarService.events
-  }
+  
 }

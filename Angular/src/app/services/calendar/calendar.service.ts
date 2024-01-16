@@ -11,7 +11,14 @@ export class CalendarService {
   constructor(private colors : ColorsService) { }
 
 
-  chosenDate!: Date; 
+  chosenDate!: Date;
+
+  hours = 0
+  minutes = 0
+  seconds = 0
+  formattedTime = `${this.hours}:${this.minutes}:${this.seconds}`;
+
+
   events: CalendarEvent[] = [
     {
       start: subDays(startOfDay(new Date()), 1),
@@ -54,6 +61,18 @@ export class CalendarService {
         },
       },
     ];
+  }
+
+  updateTime(){
+
+      this.hours = this.chosenDate.getHours();
+      this.minutes = this.chosenDate.getMinutes();
+      this.seconds = this.chosenDate.getSeconds();
+
+      this.formattedTime = `${this.hours}:${this.minutes}:${this.seconds}`;
+
+      console.log(`Current time: ${this.formattedTime}`);
+
   }
 
 }

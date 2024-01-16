@@ -17,7 +17,7 @@
 
 .appointment-form {
     margin-left: 10%;
-    margin-top: 10%;
+    margin-top: 8%;
     display: flex;
     flex-direction: column;
 }
@@ -48,10 +48,6 @@ textarea,
     border: 1px solid #ccc;
 }
 
-.input-group input[type="text"], .input-group input[type="number"],::placeholder {
-    color: #6bcdb4;
-}
-
 button {
     padding: 10px 15px;
     background-color: #68ebdb;
@@ -64,3 +60,18 @@ button {
 button:hover {
     background-color: #9edecc;
 }
+
+textarea.ng-valid.ng-touched {
+    border: 2px solid #2ecc71 !important;
+  }
+
+input.ng-valid {
+    border: 2px solid #2ecc71 !important;
+  }
+  
+  /* Champ invalide */
+  input.ng-invalid.ng-touched {
+    color: white !important;
+    border: 2px solid #e74c3c !important;
+    background-color: #ffaab9;
+  }

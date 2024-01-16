@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { ViewSchedComponent } from './view-sched/view-sched.component';
-import { ScheduleOppointComponent } from './schedule-oppoint/schedule-oppoint.component';
-import { SignUpComponent } from './sign-up/sign-up.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { HomePageComponent } from './home-page/home-page.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { ViewSchedComponent } from './components/view-sched/view-sched.component';
+import { ScheduleOppointComponent } from './components/schedule-oppoint/schedule-oppoint.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
+import { SignInComponent } from './components/sign-in/sign-in.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -21,7 +21,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
-import { CalendarHeaderComponent } from './calendar-header/calendar-header.component';
+import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -51,7 +52,10 @@ import { CalendarHeaderComponent } from './calendar-header/calendar-header.compo
     ReactiveFormsModule,
     FormsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
