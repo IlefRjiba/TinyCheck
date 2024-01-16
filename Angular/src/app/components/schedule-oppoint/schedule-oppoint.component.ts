@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators, FormsModule } from '@angular/forms';
-import { el } from 'date-fns/locale';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
 
 @Component({
   selector: 'app-schedule-oppoint',
@@ -11,6 +12,12 @@ import { Patient } from 'src/app/entities/patient.entites';
   styleUrls: ['./schedule-oppoint.component.css']
 })
 export class ScheduleOppointComponent {
+
+  constructor(private fb: FormBuilder, 
+    private toastr: ToastrService , 
+    private calendarService : CalendarService, 
+    private router:Router) {}
+
   rdv !: Appointment;
   patient !: Patient; 
 
@@ -20,14 +27,10 @@ export class ScheduleOppointComponent {
   babyName: string = "";
   babyAge: number = 0;
   reasonOfAppointment: string = "";
-  dateOfAppointment: Date = new Date();
-  hourOfAppointment: string = "";
+  dateOfAppointment = this.calendarService.initializeDate();
+  hourOfAppointment = this.calendarService.initializeHour();
 
-
-  appointmentForm ! : FormGroup;
-  hours = ['09:00', '09:30', '10:00', /* ...more hours... */ '17:30'];
-
-  constructor(private fb: FormBuilder, private toastr: ToastrService) {}
+  
 
 addAppointment(formulaire: NgForm) {
   console.log(formulaire)
@@ -39,5 +42,15 @@ addAppointment(formulaire: NgForm) {
   }
   }
 
-  
+  resetForm(formulaire: NgForm) {
+      
+      this.calendarService.resetDate();
+      this.dateOfAppointment = ""
+      this.hourOfAppointment = ""
+      formulaire.resetForm();
+    }
+
+  backToSchedule() {
+    this.router.navigate(['/viewOppointments']);
+      }
 }

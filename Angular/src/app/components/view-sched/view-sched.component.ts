@@ -64,6 +64,8 @@ export class ViewSchedComponent {
 
   hourSelected(arg0: Date) {
       this.calendarService.chosenDate = arg0;
+      this.calendarService.chosenDateByUser = true;
+      console.log('hourselected-----------------------')
       console.log(this.calendarService.chosenDate)
       this.calendarService.updateTime()
       this.router.navigate(['/schedule']);
@@ -80,7 +82,6 @@ export class ViewSchedComponent {
     this.viewDate = date;
     this.view = CalendarView.Day;
     this.calendarService.chosenDate = date;
-    console.log(this.calendarService.chosenDate)
   }
   
 }

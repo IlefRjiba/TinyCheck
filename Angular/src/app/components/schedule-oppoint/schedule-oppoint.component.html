@@ -39,13 +39,18 @@
         <!-- Appointment info -->
         <div class="input-group">
             <label for="appointmentDate">Date of Appointment</label>
-            <input type="date" id="appointmentDate" ngModel name="dateOfAppointment" required>
+            <input type="date" id="appointmentDate" name='dateOfAppointment' [(ngModel)]="dateOfAppointment" required>
         </div>
         <div class="input-group">
             <label for="appointmentTime">Hour of Appointment</label>
-            <input type="time" id="appointmentTime" ngModel name="hourOfAppointment"required>
+            <input type="time" id="appointmentTime" ngModel name="hourOfAppointment" [(ngModel)]="hourOfAppointment" required>
         </div>
-        <button type="submit" (click)="addAppointment(formulaire)" >Submit</button>
+        
+        <span style="align-items:stretch !important;">
+        <button type="submit" style="background-color: #ff8fab; margin:3px" (click)="addAppointment(formulaire)" >Submit</button>
+        <button (click)="backToSchedule()" style="margin:3px; background-color: #0bc672">View doctor's schedule</button>
+        <button (click)="resetForm(formulaire)" style="background-color: #c10b39; margin:3px" >Reset the form</button>
+        </span>
     </form>
 </div>
 </div>

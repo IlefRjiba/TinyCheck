@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
 import { addDays, endOfDay, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { ColorsService } from '../colors/colors.service';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,17 @@ export class CalendarService {
 
   constructor(private colors : ColorsService) { }
 
+  private dateSubject = new Subject<void>();
+  dateChanged$ = this.dateSubject.asObservable();
 
-  chosenDate!: Date;
 
+  chosenDate = new Date();
+  chosenDateByUser : boolean = false;
   hours = 0
   minutes = 0
   seconds = 0
-  formattedTime = `${this.hours}:${this.minutes}:${this.seconds}`;
+  formattedTime : string = "0:0";
+  formattedDate : string = ""
 
 
   events: CalendarEvent[] = [
@@ -46,6 +51,26 @@ export class CalendarService {
     }
   ];
 
+  initializeHour() : string {
+    if (this.chosenDateByUser)
+    return this.updateTime();
+    else 
+    return "";
+  }
+
+  initializeDate(){
+    let day = this.chosenDate.getDate(); // Returns the day of the month (1-31)
+    let month = this.chosenDate.getMonth() + 1; // Returns the month (0-11), so we add 1
+    let year = this.chosenDate.getFullYear(); // Returns the year (four digits)
+    this.formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+    if (this.chosenDateByUser)
+    return this.formattedDate;
+    else 
+    return "";
+
+  }
+
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -64,15 +89,25 @@ export class CalendarService {
   }
 
   updateTime(){
+    console.log('update time -------------------------');
 
+    console.log(this.chosenDate)
       this.hours = this.chosenDate.getHours();
       this.minutes = this.chosenDate.getMinutes();
       this.seconds = this.chosenDate.getSeconds();
 
-      this.formattedTime = `${this.hours}:${this.minutes}:${this.seconds}`;
+      const addLeadingZero = (value: number) => (value < 10 ? `0${value}` : value);
+
+      this.formattedTime = `${addLeadingZero(this.hours)}:${addLeadingZero(this.minutes)}`;
 
       console.log(`Current time: ${this.formattedTime}`);
 
+      return this.formattedTime;
+  }
+
+  resetDate(){
+    this.formattedTime="00:00";
+    this.formattedDate = "";
   }
 
 }
