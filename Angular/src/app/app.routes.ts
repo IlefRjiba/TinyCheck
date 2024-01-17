@@ -7,6 +7,7 @@ import { ViewSchedComponent } from "./components/view-sched/view-sched.component
 
 const APP_ROUTING : Routes = [
     { path: 'home', component: HomePageComponent },
+    { path: '', component: HomePageComponent },
     { path: 'signIn', component: SignInComponent },
     { path: 'signUp', component: SignUpComponent },
     { path: 'schedule', component: ScheduleOppointComponent },

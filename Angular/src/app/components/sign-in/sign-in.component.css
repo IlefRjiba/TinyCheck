@@ -81,3 +81,14 @@ h1{
     text-decoration: overline;
   }
   
+  input.ng-valid {
+    border: 2px solid #2ecc71 !important;
+    background-color: white !important;
+  }
+  
+  /* Champ invalide */
+  input.ng-invalid.ng-touched {
+    color: white !important;
+    border: 2px solid #e74c3c !important;
+    background-color: #ffaab9;
+  }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, FormsModule } from '@angular/forms';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -6,5 +8,25 @@ import { Component } from '@angular/core';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
+
+email !: string;
+password !: string;
+
+invalidEmail : boolean = false;
+invalidPassword : boolean = false;
+shortPassword : boolean = false;
+
+signIn(formulaire : NgForm) {
+ console.log(this.email)
+ console.log(this.password)
+ if (this.email.length == 0) {
+   this.invalidEmail = true;
+ }
+ if (this.password.length == 0) {
+  this.invalidPassword = true;
+}
+if (this.password.length < 8) {
+  this.shortPassword = true;}
+}
 
 }

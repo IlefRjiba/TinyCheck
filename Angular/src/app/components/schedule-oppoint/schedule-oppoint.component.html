@@ -39,11 +39,13 @@
         <!-- Appointment info -->
         <div class="input-group">
             <label for="appointmentDate">Date of Appointment</label>
-            <input type="date" id="appointmentDate" name='dateOfAppointment' [(ngModel)]="dateOfAppointment" required>
+            <input type="date" id="appointmentDate" name='dateOfAppointment' [(ngModel)]="dateOfAppointment" required #date="ngModel">
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="date.invalid && date.touched"> Ce champs ne peut pas être vide</div>
         </div>
         <div class="input-group">
             <label for="appointmentTime">Hour of Appointment</label>
-            <input type="time" id="appointmentTime" ngModel name="hourOfAppointment" [(ngModel)]="hourOfAppointment" required>
+            <input type="time" id="appointmentTime" ngModel name="hourOfAppointment" [(ngModel)]="hourOfAppointment" required #hour="ngModel">
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="hour.invalid && hour.touched"> Ce champs ne peut pas être vide</div>
         </div>
         
         <span style="align-items:stretch !important;">

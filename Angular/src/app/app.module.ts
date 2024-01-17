@@ -10,7 +10,7 @@ import { SignInComponent } from './components/sign-in/sign-in.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { ROUTES } from './app.routes';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, NgModel, ReactiveFormsModule} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -55,7 +55,6 @@ import { ToastrModule } from 'ngx-toastr';
     NgbModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
