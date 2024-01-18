@@ -6,23 +6,28 @@
         <form class="form"  #formulaire="ngForm">
           <div class="form-group">
             <label for="name">Username</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" [(ngModel)]="name" #username="ngModel" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="username.touched&&username.invalid"> Ce champs ne peut pas être vide</div>
           </div>
           <div class="form-group">
             <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email">
+            <input email name="email"  type="email" class="form-control" id="email" placeholder="Enter your email" #addresse="ngModel" [(ngModel)]="mail" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="addresse.touched&&addresse.invalid"> Ce champs ne peut pas être vide et doit être un email</div>
           </div>
           <div class="form-group">
             <label for="number">Phone Number</label>
-            <input type="number" class="form-control" id="number" placeholder="Enter your phone number">
+            <input min minlength="8" maxlength="8" type="number" [(ngModel)]="phone" #phoneNbre="ngModel" class="form-control" id="number" placeholder="Enter your phone number" name="phoneNbre" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="phoneNbre.touched&&phoneNbre.invalid"> Ce champs doit comporter 8 nombres</div>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your password">
+            <input minlength="6" type="password" class="form-control" [(ngModel)]="pwd" #psswd="ngModel" id="password" placeholder="Enter your password" name="pwd" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="psswd.touched&&psswd.invalid"> Ce champs doit comporter 6 caractères au minimum</div>
           </div>
           <div class="form-group">
             <label for="passwordconfirm">Confirm your password</label>
-            <input type="password" class="form-control" id="passwordconfirm" placeholder="Confirm your password">
+            <input minlength="6" type="password" name="pwd2" class="form-control" id="passwordconfirm" placeholder="Confirm your password" #psswd2="ngModel" [(ngModel)]="pwd2" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="psswd2.touched&&psswd2.invalid"> Ce champs doit comporter 6 caractères au minimum</div>
           </div>
           <button [disabled]="formulaire.invalid" (click)="addUser(formulaire)" class="btn submit-button">Envoyer</button>
           
