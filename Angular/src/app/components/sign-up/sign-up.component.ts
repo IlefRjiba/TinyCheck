@@ -9,21 +9,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-
+  user = {
+    username: '',
+    email: '',
+    phone: '',
+    password: '',
+    passwordConfirm: ''
+  };
   constructor(
     private UserService: UserService,
     private router: Router
   ) { }
 
-  addUser(formulaire: NgForm) {
-    this.UserService.addUser(formulaire.value).subscribe(
-      (reponse) => this.router.navigate(['']),
-      (erreur) => console.log(erreur)
+
+  onSignUp(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    
+    this.UserService.signUp(form.value).subscribe(
+      response => {
+        console.log('User signed up', response);
+        this.router.navigate(['/home']);
+        // Vous pouvez ici rediriger l'utilisateur ou afficher un message de succès
+      },
+      error => {
+        console.error('Sign up failed', error);
+      }
     );
   }
-
-  onSubmit(formulaire: NgForm){
-    console.log(formulaire);
-    }
-
 }
+

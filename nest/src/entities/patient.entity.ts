@@ -30,4 +30,5 @@ export class Patient {
   @ManyToMany(() => User, (user) => user.patients)
   @JoinTable()
   users: User[];
+
 }

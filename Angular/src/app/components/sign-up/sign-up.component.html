@@ -1,32 +1,32 @@
+<!-- sign-up.component.html -->
 <div class="backgroundImage">
-    <div>
-        <h1>hey</h1>
+  <div>
+    <h1>hey</h1>
     <div class="card">
-        <h2 class="card-header">Sign Up</h2>
-        <form class="form"  #formulaire="ngForm">
-          <div class="form-group">
-            <label for="name">Username</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter your name">
-          </div>
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your email">
-          </div>
-          <div class="form-group">
-            <label for="number">Phone Number</label>
-            <input type="number" class="form-control" id="number" placeholder="Enter your phone number">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your password">
-          </div>
-          <div class="form-group">
-            <label for="passwordconfirm">Confirm your password</label>
-            <input type="password" class="form-control" id="passwordconfirm" placeholder="Confirm your password">
-          </div>
-          <button [disabled]="formulaire.invalid" (click)="addUser(formulaire)" class="btn submit-button">Envoyer</button>
-          
-        </form>
-      </div>
+      <h2 class="card-header">Sign Up</h2>
+      <form class="form" (ngSubmit)="onSignUp(formulaire)" #formulaire="ngForm">
+        <div class="form-group">
+          <label for="name">Username</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="user.username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email" [(ngModel)]="user.email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="number">Phone Number</label>
+          <input type="number" class="form-control" id="number" placeholder="Enter your phone number" [(ngModel)]="user.phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter your password" [(ngModel)]="user.password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="passwordconfirm">Confirm your password</label>
+          <input type="password" class="form-control" id="passwordconfirm" placeholder="Confirm your password" [(ngModel)]="user.passwordConfirm" name="passwordConfirm" required>
+        </div>
+        <button type="submit" [disabled]="formulaire.invalid" class="btn submit-button">Envoyer</button>
+      </form>
     </div>
+  </div>
 </div>

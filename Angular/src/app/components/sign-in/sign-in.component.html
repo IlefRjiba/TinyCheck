@@ -3,7 +3,7 @@
         <h1>hey</h1>
     <div class="card">
         <h2 class="card-header">Sign In</h2>
-        <form class="form" #formulaire="ngForm">
+        <form class="form" (ngSubmit)="onSignIn(formulaire)" #formulaire="ngForm">
           <div class="form-group">
             <label for="email">Email address</label>
             <input email type="email" class="form-control" id="email" placeholder="Enter email" #mail="ngModel" name="email" [(ngModel)]="email" required>
@@ -19,7 +19,7 @@
               <input type="checkbox"> Remember me
             </label>
           </div>
-          <button type="submit" class="btn submit-button" (click)="signIn(formulaire)">Sign in</button>
+          <button type="submit" class="btn submit-button">Sign in</button>
           <a href="#" class="forgot-password">Forgot password?</a>
         </form>
       </div>

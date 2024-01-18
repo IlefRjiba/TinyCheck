@@ -3,12 +3,12 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <div class="Navcontainer">
-	
+
 	<nav class="navbar navbar-expand-lg navbar-light">
-    
+
 	<div class="row">
 		<h2>Welcome to TinyCheck</h2>
-	</div> 
+	</div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -19,15 +19,15 @@
                     <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['viewOppointments']" routerLinkActive="active">View doctor's schedule</a>
+                    <a class="nav-link" [routerLink]="['viewOppointments']" routerLinkActive="active"   [ngClass]="{'disabled-link': !isLoggedIn}">View doctor's schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['schedule']" routerLinkActive="active">Schedule an oppointment</a>
+                    <a class="nav-link" [routerLink]="['schedule']" routerLinkActive="active"  [ngClass]="{'disabled-link': !isLoggedIn}">Schedule an oppointment</a>
                 </li>
 
                 <span class="buttons">
-                <button type="button" class="btn btn-primary btn-signin" [routerLink]="['signIn']" routerLinkActive="in_active">Sign In</button>
-                <button type="button" class="btn  btn-signup" [routerLink]="['signUp']" routerLinkActive="up_active">Sign Up</button>
+                <button type="button" class="btn btn-primary btn-signin" [routerLink]="['signIn']" routerLinkActive="in_active"  (click)="loginUser()" [disabled]="isLoggedIn">Sign In</button>
+                <button type="button" class="btn  btn-signup" [routerLink]="['signUp']" routerLinkActive="up_active" [disabled]="isLoggedIn">Sign Up</button>
               </span>
 
                 <img src="/assets/images/profile_pic.jpg" alt="profile pic">
