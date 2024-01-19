@@ -4,6 +4,10 @@ import { SignInComponent } from "./components/sign-in/sign-in.component";
 import { SignUpComponent } from "./components/sign-up/sign-up.component";
 import { ScheduleOppointComponent } from "./components/schedule-oppoint/schedule-oppoint.component";
 import { ViewSchedComponent } from "./components/view-sched/view-sched.component";
+import { ProfileComponent } from "./components/profile/profile.component";
+import { EditProfileComponent } from "./components/edit-profile/edit-profile.component";
+import { SignedInHomeComponent } from "./components/signed-in-home/signed-in-home.component";
+import { NavBarConnectedComponent } from "./components/nav-bar-connected/nav-bar-connected.component";
 
 const APP_ROUTING : Routes = [
     { path: 'home', component: HomePageComponent },
@@ -12,6 +16,10 @@ const APP_ROUTING : Routes = [
     { path: 'signUp', component: SignUpComponent },
     { path: 'schedule', component: ScheduleOppointComponent },
     { path: 'viewOppointments', component: ViewSchedComponent },
+    { path: 'viewProfile', component:ProfileComponent },
+    { path: 'editProfile', component:EditProfileComponent},
+    { path: 'signedin', component:SignedInHomeComponent},
+    { path: 'nav', component:NavBarConnectedComponent},
 ]
 
 export const ROUTES = RouterModule.forRoot(APP_ROUTING);

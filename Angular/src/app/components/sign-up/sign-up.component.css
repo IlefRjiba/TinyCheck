@@ -1,95 +1,94 @@
 .backgroundImage{
-    background-image: url("/assets/images/sign2.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
+  background-image: url("/assets/images/sign2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 h1{
-    color: #cccccc00;
-    margin-bottom: 0%;
+  color: #cccccc00;
+  margin-bottom: 0%;
 }
 
 .card {
-    background-color: rgba(255, 255, 255, 0.473);
-    padding: 20px;
-    width: 430px;
-    height: 610px;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-    text-align: center;
-    margin-left: 545px;
-    margin-top: 0px;
-  }
-  
-  .card-header {
-    background-color: #ff8fab; /* light blue background */
-    color: white;
-    padding: 10px;
-    margin: -20px -20px 20px -20px;
-    border-radius: 10px 10px 0 0;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    text-align: left;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    color: #82eae3;
-  }
-  
-  .form-group input[type="email"]::placeholder {
-    color: #6bcdb4;
+  background-color: rgba(255, 255, 255, 0.473);
+  padding: 20px;
+  width: 430px;
+  height: 610px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-left: 545px;
+  margin-top: 0px;
+}
+
+.card-header {
+  background-color: #ff8fab; /* light blue background */
+  color: white;
+  padding: 10px;
+  margin: -20px -20px 20px -20px;
+  border-radius: 10px 10px 0 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  text-align: left;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  color: #82eae3;
+}
+
+.form-group input[type="email"]::placeholder {
+  color: #6bcdb4;
 }
 
 .form-group input[type="text"]::placeholder {
-  color: #6bcdb4;
-}
-  
-  .form-group input[type="password"]::placeholder {
-    color: #6bcdb4;
-}
-  
-  .form-group input[type="number"]::placeholder {
-    color: #6bcdb4;
+color: #6bcdb4;
 }
 
-  .submit-button {
-    width: 100%;
-    background-color: #ff8fab; /* light blue background */
-    color: white;
-    text-transform: bold;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #ff7597;
-  }
-  
-  .forgot-password {
-    display: block;
-    margin-top: 15px;
-    color: #ff8fab; /* light blue text */
-    text-decoration: none;
-    text-decoration: underline;
-  }
-  
-  .forgot-password:hover {
-    text-decoration: overline;
-  }
-  
+.form-group input[type="password"]::placeholder {
+  color: #6bcdb4;
+}
+
+.form-group input[type="number"]::placeholder {
+  color: #6bcdb4;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #ff8fab; /* light blue background */
+  color: white;
+  text-transform: bold;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #ff7597;
+}
+
+.forgot-password {
+  display: block;
+  margin-top: 15px;
+  color: #ff8fab; /* light blue text */
+  text-decoration: none;
+  text-decoration: underline;
+}
+
+.forgot-password:hover {
+  text-decoration: overline;
+}

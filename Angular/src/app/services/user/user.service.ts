@@ -17,4 +17,9 @@ export class UserService {
   addUser(user: User) {
     return this.http.post(API_LINK + '/create-user', user);
   }
+  public logout() {
+    // Clear user from subject and perform necessary cleanup
+    //this.currentUserSubject.next(null);
+  }
+ 
 }

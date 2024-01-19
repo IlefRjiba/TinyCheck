@@ -23,6 +23,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ProfileComponent } from './profile/profile.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
+import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar-connected.component';
 
 
 @NgModule({
@@ -34,7 +38,11 @@ import { ToastrModule } from 'ngx-toastr';
     SignUpComponent,
     SignInComponent,
     HomePageComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    SignedInHomeComponent,
+    NavBarConnectedComponent
   ],
   imports: [
     BrowserModule,
