@@ -88,3 +88,17 @@ img {
   pointer-events: none; /* Désactive les événements de pointer, ce qui rend le lien non cliquable */
   color: gray; /* Vous pouvez choisir une couleur grise ou toute autre couleur pour indiquer qu'il est désactivé */
 }
+.dropdown-menu {
+    border-color: rgb(245, 4, 149);
+}
+
+.dropdown-item:hover {
+    background-color: rgb(245, 4, 149);
+    color: #fff;
+}
+
+.fa-user,
+.fa-cogs,
+.fa-sign-out-alt {
+    margin-right: 5px;
+}
