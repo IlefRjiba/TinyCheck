@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "class-validator": "^0.14.1",
+    "typeorm": "^0.3.19"
+  }
+}

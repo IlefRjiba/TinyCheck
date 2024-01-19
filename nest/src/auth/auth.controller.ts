@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 // auth.controller.ts
 
-import { Controller, Post, Body,UseGuards,Get , Req} from '@nestjs/common';
+import { Controller, Post, Body,UseGuards,Get , Req,UnauthorizedException} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { LoginUserDto } from "../dto/login-user.dto";
@@ -17,7 +17,21 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginUserDto: LoginUserDto) {
-    return this.authService.login(loginUserDto);
+    const user = await this.authService.validateUser(
+      loginUserDto.email,
+      loginUserDto.password,
+    );
+    if (!user) {
+      // Les informations d'identification ne sont pas valides
+      throw new UnauthorizedException('Identifiants incorrects');
+    }
+
+    // Authentification réussie, générez un token
+    const token = await this.authService.generateToken(user);
+
+    return {
+      access_token: token,
+    };
   }
   @UseGuards(AuthGuard)
   @Get('check')

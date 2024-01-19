@@ -1,13 +1,13 @@
 /* eslint-disable prettier/prettier */
-import {Injectable, OnModuleInit,UnauthorizedException} from '@nestjs/common';
+import {Injectable, OnModuleInit,} from '@nestjs/common';
 import {User} from "../entities/user.entity";
 import {JwtService} from "@nestjs/jwt";
 import {UserService} from "../user/user.service";
 import * as bcrypt from 'bcryptjs'
 import {CreateUserDto} from "../dto/create-user.dto";
-import {LoginUserDto} from "../dto/login-user.dto";
 import {Role} from "../enums/role.enum";
-const adminUser : CreateUserDto = {email: 'admin@gmail.com', username: 'superAdmin', password: 'admin12'}
+
+const adminUser : CreateUserDto = {email: 'admin@gmail.com', username: 'superAdmin', password: 'admin12', phone: 27028075}
 
 @Injectable()
 export class AuthService implements OnModuleInit  {
@@ -32,10 +32,7 @@ export class AuthService implements OnModuleInit  {
         }
     
 
-    async login (dto: LoginUserDto) {
-        const user = await this.validateUser(dto)
-        return await this.generateToken(user)
-    }
+    
 
     async register (dto: CreateUserDto) {
 
@@ -51,7 +48,7 @@ export class AuthService implements OnModuleInit  {
 
         const hashedPassword = await bcrypt.hash(password, salt)
 
-        const newUser = await this.userService.createUser({ email, username, password: hashedPassword})
+        const newUser = await this.userService.createUser({ email, username, phone:0, password: hashedPassword})
         const token = await this.generateToken(newUser)
 
         return {token: token}
@@ -70,23 +67,7 @@ export class AuthService implements OnModuleInit  {
     }
 
 
-    async validateUser (dto: LoginUserDto) {
-
-        const {password: dtoPassword, email} = dto
-
-        const findUser = await this.userService.getUserByEmail(email)
-
-        const {password: userPassword} = findUser
-
-        const comparePasswords = await bcrypt.compare(dtoPassword, userPassword)
-
-        if (findUser && comparePasswords) {
-            return findUser
-        }
-
-        throw new UnauthorizedException({message: 'Incorrect email or password'})
-    }
-
+    
     async checkAuth (userData) {
         const payload = {email: userData.email, userId: userData.userId, username: userData.username, role: userData.role}
 
@@ -94,5 +75,29 @@ export class AuthService implements OnModuleInit  {
             token: this.jwtService.sign(payload)
         }
     }
+    async validateUser(email: string, pass: string): Promise<any> {
+        const user = await this.userService.findOneByEmail(email);
+        if (user && await bcrypt.comparePassword(pass, user.password)) {
+          // Utilisez bcrypt.compare pour vérifier le mot de passe haché
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          const { password, ...result } = user;
+          return result;
+        }
+        return null;
+      }
+      
+      async comparePassword(
+        enteredPassword: string,
+        hashedPassword: string,
+      ): Promise<boolean> {
+        return await bcrypt.compare(enteredPassword, hashedPassword);
+      }
+
+      async login(user: any): Promise<any> {
+        const payload = { email: user.email, sub: user.userId };
+        return {
+          access_token: this.jwtService.sign(payload),
+        };
+      }
 
 }

@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
 import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar-connected.component';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar
     NgbModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

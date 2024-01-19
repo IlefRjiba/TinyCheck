@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import { IsNotEmpty, IsEmail, IsString, MinLength } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty()
@@ -9,10 +9,12 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   @IsString()
-  @MinLength(6)
   password: string;
 
   @IsNotEmpty()
   @IsString()
   username: string;
+  @IsNotEmpty()
+  phone: number;
+  
 }

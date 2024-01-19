@@ -4,7 +4,7 @@
     box-shadow: 0 3px 1px 0 rgba(0, 0, 0, 0.025);
     color: rgb(245, 4, 149);
     width: 100%;
-    
+
 }
 
 .active,
@@ -25,7 +25,7 @@ h2 {
 .topnav {
     display: flex;
     align-items: center;
-    
+
 }
 
 .buttons {
@@ -78,9 +78,13 @@ img {
     border-color: #fa6187 ;
     color: #fa6187;
     border-radius: 25px;
-    
+
 }
 
 .btn-signup:focus, .btn-signup:active , .btn-signin:focus, .btn-signin:active {
     outline: none !important;
+}
+.disabled-link {
+  pointer-events: none; /* Désactive les événements de pointer, ce qui rend le lien non cliquable */
+  color: gray; /* Vous pouvez choisir une couleur grise ou toute autre couleur pour indiquer qu'il est désactivé */
 }
