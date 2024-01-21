@@ -1,27 +1,31 @@
 <div class="backgroundImage">
-    <div>
-        <h1>hey</h1>
+  <div>
+    <h1>hey</h1>
     <div class="card">
-        <h2 class="card-header">Sign In</h2>
-        <form class="form" (ngSubmit)="onSignIn(formulaire)" #formulaire="ngForm">
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input email type="email" class="form-control" id="email" placeholder="Enter email" #mail="ngModel" name="email" [(ngModel)]="email" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="mail.invalid&&mail.touched"> Ce champs ne peut pas être vide</div>
+      <h2 class="card-header">Sign In</h2>
+      <form class="form" (ngSubmit)="onSignIn(formulaire)" #formulaire="ngForm">
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" [(ngModel)]="email" #emailField="ngModel" required>
+          <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="emailField.invalid && emailField.touched">
+            Ce champ ne peut pas être vide
           </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" [(ngModel)]="password" class="form-control" id="password" name="pwd" placeholder="Enter password" #pwd="ngModel" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="pwd.touched&&pwd.invalid"> Ce champs ne peut pas être vide</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" placeholder="Enter password" name="password" [(ngModel)]="password" #passwordField="ngModel" required>
+          <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="passwordField.touched && passwordField.invalid">
+            Ce champ ne peut pas être vide
           </div>
-          <div class="checkbox">
-            <label>
-              <input type="checkbox"> Remember me
-            </label>
-          </div>
-          <button type="submit" class="btn submit-button">Sign in</button>
-          <a href="#" class="forgot-password">Forgot password?</a>
-        </form>
-      </div>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox"> Remember me
+          </label>
+        </div>
+        <button type="submit" class="btn submit-button">Sign in</button>
+        <a href="#" class="forgot-password">Forgot password?</a>
+      </form>
     </div>
+  </div>
 </div>

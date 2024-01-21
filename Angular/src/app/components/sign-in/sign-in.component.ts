@@ -13,20 +13,19 @@ export class SignInComponent {
   constructor( private UserService: UserService,
     private router: Router) {}
 
-  onSignIn(form: NgForm) {
-    if (form.invalid) {
-      return;
-    }
-    this.UserService.signIn(form.value.email, form.value.password).subscribe(
-      response => {
-        console.log('User signed in', response);
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/home']);
-        // Redirigez l'utilisateur ou affichez un message de bienvenue
-      },
-      error => {
-        console.error('Sign in failed', error);
+    onSignIn(form: NgForm) {
+      if (form.invalid) {
+        return;
       }
-    );
-  }
+      const { email, password } = form.value;
+      this.UserService.signIn(email, password).subscribe({
+        next: (response) => {
+          // La connexion a réussi, vous pouvez maintenant rediriger l'utilisateur ou effectuer d'autres actions
+          this.router.navigate(['/home']);
+        },
+        error:(error) => {
+          console.error('Sign in failed :(', error);
+        }
+    });
+    }
 }

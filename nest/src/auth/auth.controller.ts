@@ -26,12 +26,7 @@ export class AuthController {
       throw new UnauthorizedException('Identifiants incorrects');
     }
 
-    // Authentification réussie, générez un token
-    const token = await this.authService.generateToken(user);
-
-    return {
-      access_token: token,
-    };
+    return this.authService.login(user);
   }
   @UseGuards(AuthGuard)
   @Get('check')

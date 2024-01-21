@@ -77,26 +77,20 @@ export class AuthService implements OnModuleInit  {
     }
     async validateUser(email: string, pass: string): Promise<any> {
         const user = await this.userService.findOneByEmail(email);
-        if (user && await bcrypt.comparePassword(pass, user.password)) {
-          // Utilisez bcrypt.compare pour vérifier le mot de passe haché
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        if (user && pass === user.password) {
+          // La comparaison directe des mots de passe en clair
           const { password, ...result } = user;
           return result;
         }
         return null;
       }
       
-      async comparePassword(
-        enteredPassword: string,
-        hashedPassword: string,
-      ): Promise<boolean> {
-        return await bcrypt.compare(enteredPassword, hashedPassword);
-      }
+      
 
-      async login(user: any): Promise<any> {
-        const payload = { email: user.email, sub: user.userId };
+      async login(user: any): Promise<{ access_token: string }> {
+        const payload = { email: user.email, sub: user.id };
         return {
-          access_token: this.jwtService.sign(payload),
+          access_token: this.jwtService.sign(payload), // Génère le token JWT
         };
       }
 
