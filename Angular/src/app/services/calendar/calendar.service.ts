@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CalendarService {
 
-  constructor(private colors : ColorsService , private appointmentService : AppointmentsService, private toastr:ToastrService) { }
+  constructor(private colors : ColorsService , private toastr:ToastrService) { }
 
   private dateSubject = new Subject<void>();
   dateChanged$ = this.dateSubject.asObservable();
@@ -26,17 +26,8 @@ export class CalendarService {
   seconds = 0
   formattedTime : string = "0:0";
   formattedDate : string = ""
-  appointments : Appointment[] = [];
+  
 
-  ngOnInit(): void {
-    this.appointmentService.getAppointments().subscribe({
-      next: (appointments) => {this.appointments = appointments
-      },
-      error:(error) => { this.toastr.error('Erreur lors du chargement des cvs') ;
-      this.appointments = []
-    }
-  });
-  }
 
 
   events: CalendarEvent[] = [
@@ -54,16 +45,16 @@ export class CalendarService {
     },
     {
       start: startOfDay(new Date()),
-      title: 'unavailable',
+      title: 'hellooooooooooo',
       color: { ...this.colors.colors['grey'] },
     },
     {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...this.colors.colors['grey'] },
-      allDay: true,
-    }
+  start: subDays(endOfMonth(new Date()), 3),
+   end: addDays(endOfMonth(new Date()), 3),
+  title: 'A long event that spans 2 months',
+  color: { ...this.colors.colors['grey'] },
+   allDay: true,
+  }
   ];
 
   initializeHour() : string {

@@ -22,21 +22,10 @@ import {FlatpickrModule} from 'angularx-flatpickr';
   } from 'angular-calendar';
   import { EventColor } from 'calendar-utils';
   import { CalendarService } from '../../services/calendar/calendar.service';
-  
-  const colors: Record<string, EventColor> = {
-    red: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3',
-    },
-    blue: {
-      primary: '#1e90ff',
-      secondary: '#D1E8FF',
-    },
-    yellow: {
-      primary: '#e3bc08',
-      secondary: '#FDF1BA',
-    },
-  };
+import { ColorsService } from 'src/app/services/colors/colors.service';
+import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
+import { Appointment } from 'src/app/entities/appointment.entity';
+import { ToastrService } from 'ngx-toastr';
   
   @Component({
     selector: 'app-view-sched',
@@ -58,30 +47,58 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 
 export class ViewSchedComponent {
 
-  constructor(private calendarService : CalendarService , private router : Router ){
+  constructor(private calendarService : CalendarService , private appointmentService : AppointmentsService ,private router : Router , private colors : ColorsService, private toastr : ToastrService ){
     this.events=this.calendarService.events
   }
 
-  hourSelected(arg0: Date) {
-      this.calendarService.chosenDate = arg0;
-      this.calendarService.chosenDateByUser = true;
-      console.log('hourselected-----------------------')
-      console.log(this.calendarService.chosenDate)
-      this.calendarService.updateTime()
-      this.router.navigate(['/schedule']);
-  }
+ 
 
   selectedDate ?: Date
   view: CalendarView = CalendarView.Month;
-
   viewDate: Date = new Date();
+  appointments : Appointment[] = [];
 
-  events: CalendarEvent[] = [];
+
+  events: CalendarEvent[] = [
+    {
+      start: startOfDay(new Date()),
+      title: 'heeeeeeeeeeeeereeeeeeeeeeeeeeeeeeeee',
+      color: { ...this.colors.colors['grey'] },
+    },
+  ];
 
   changeDay(date: Date) {
     this.viewDate = date;
     this.view = CalendarView.Day;
     this.calendarService.chosenDate = date;
+  }
+
+  hourSelected(arg0: Date) {
+    this.calendarService.chosenDate = arg0;
+    this.calendarService.chosenDateByUser = true;
+    console.log('hourselected-----------------------')
+    console.log(this.calendarService.chosenDate)
+    this.calendarService.updateTime()
+    this.router.navigate(['/schedule']);
+}
+
+    ngOnInit(): void {
+    this.appointmentService.getAppointments().subscribe({
+      next: (appointments) => {
+        this.appointments = appointments;
+        
+        // Create new events based on the appointments
+        this.calendarService.events = appointments.map(appointment => ({
+          start: new Date(appointment.date + ' ' + appointment.time),
+          title: "Réservé",
+          color: { ...this.colors.colors['grey'] }
+        }));
+
+      },
+      error:(error) => { this.toastr.error('Erreur lors du chargement des cvs') ;
+      this.appointments = []
+    }
+  });
   }
   
 }

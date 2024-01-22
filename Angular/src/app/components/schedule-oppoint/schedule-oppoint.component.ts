@@ -21,6 +21,8 @@ export class ScheduleOppointComponent {
     private router:Router,
     private appointmentServie : AppointmentsService) {}
 
+  viewform : boolean = true ; 
+
   rdv !: Appointment;
   patient !: Patient; 
 
@@ -39,10 +41,8 @@ addAppointment(formulaire: NgForm) {
   console.log(formulaire)
   if (formulaire.valid) {
     this.rdv = new Appointment(this.dateOfAppointment, this.hourOfAppointment);
-    this.patient = new Patient(this.NameOfParent, this.SurnameOfParent, this.NameOfBaby, this.AgeOfBaby, this.WeightOfBaby, this.ReasonOfAppointment);
-    console.log(this.patient)
+    this.patient=new Patient(this.NameOfParent, this.SurnameOfParent, this.NameOfBaby, this.AgeOfBaby, this.WeightOfBaby, this.ReasonOfAppointment);
     this.appointmentServie.addAppointment(this.rdv, this.patient);
-    this.toastr.success('Rendez-vous ajouté avec succès');
   }
   else {
     this.toastr.error("Veuillez remplir tous les champs correctement")
