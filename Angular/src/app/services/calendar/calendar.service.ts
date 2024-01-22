@@ -2,14 +2,18 @@ import { Injectable } from '@angular/core';
 import {CalendarEvent} from 'angular-calendar';
 import { addDays, endOfDay, endOfMonth, startOfDay, subDays } from 'date-fns';
 import { ColorsService } from '../colors/colors.service';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { Appointment } from 'src/app/entities/appointment.entity';
+import { HttpClient } from '@angular/common/http';
+import { AppointmentsService } from '../appointments/appointments.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalendarService {
 
-  constructor(private colors : ColorsService) { }
+  constructor(private colors : ColorsService , private appointmentService : AppointmentsService, private toastr:ToastrService) { }
 
   private dateSubject = new Subject<void>();
   dateChanged$ = this.dateSubject.asObservable();
@@ -22,6 +26,17 @@ export class CalendarService {
   seconds = 0
   formattedTime : string = "0:0";
   formattedDate : string = ""
+  appointments : Appointment[] = [];
+
+  ngOnInit(): void {
+    this.appointmentService.getAppointments().subscribe({
+      next: (appointments) => {this.appointments = appointments
+      },
+      error:(error) => { this.toastr.error('Erreur lors du chargement des cvs') ;
+      this.appointments = []
+    }
+  });
+  }
 
 
   events: CalendarEvent[] = [
@@ -71,23 +86,6 @@ export class CalendarService {
 
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: this.colors.colors['red'],
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
-  }
-
   updateTime(){
     console.log('update time -------------------------');
 
@@ -109,5 +107,6 @@ export class CalendarService {
     this.formattedTime="00:00";
     this.formattedDate = "";
   }
+
 
 }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
+import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 
 @Component({
@@ -13,20 +14,22 @@ import { CalendarService } from 'src/app/services/calendar/calendar.service';
 })
 export class ScheduleOppointComponent {
 
+
   constructor(private fb: FormBuilder, 
     private toastr: ToastrService , 
     private calendarService : CalendarService, 
-    private router:Router) {}
+    private router:Router,
+    private appointmentServie : AppointmentsService) {}
 
   rdv !: Appointment;
   patient !: Patient; 
 
-  parentName: string = "";
-  parentSurname: string = "";
-  phoneNumber: string = "";
-  babyName: string = "";
-  babyAge: number = 0;
-  reasonOfAppointment: string = "";
+  NameOfParent: string = "";
+  SurnameOfParent: string = "";
+  NameOfBaby: string = "";
+  AgeOfBaby: number = 0;
+  WeightOfBaby: number = 0;
+  ReasonOfAppointment: string = "";
   dateOfAppointment = this.calendarService.initializeDate();
   hourOfAppointment = this.calendarService.initializeHour();
 
@@ -35,6 +38,9 @@ export class ScheduleOppointComponent {
 addAppointment(formulaire: NgForm) {
   console.log(formulaire)
   if (formulaire.valid) {
+    this.rdv = new Appointment(this.dateOfAppointment, this.hourOfAppointment);
+    this.patient = new Patient(this.NameOfParent, this.SurnameOfParent, this.NameOfBaby, this.AgeOfBaby, this.WeightOfBaby, this.ReasonOfAppointment);
+    this.appointmentServie.addAppointment(this.rdv, this.patient);
     this.toastr.success('Rendez-vous ajouté avec succès');
   }
   else {

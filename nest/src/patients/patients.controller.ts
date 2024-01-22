@@ -17,8 +17,8 @@ create(@Body() createPatientDto: CreatePatientDto) {
   return this.patientsService.create(createPatientDto);
 }
 
-@Roles(Role.Admin)
-@UseGuards(AuthGuard, RoleGuard)
+// @Roles(Role.Admin)
+// @UseGuards(AuthGuard, RoleGuard)
 @Get()
 findAll() {
   return this.patientsService.findAll();
