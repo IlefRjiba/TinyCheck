@@ -9,24 +9,18 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./nav-bar-connected.component.css']
 })
 export class NavBarConnectedComponent {
-  user: User = new User(); // Initialize user
-  userName$: Observable<string>; // This will hold the observable of the user's name
   
+  user!: User; 
   constructor(
     private userService: UserService, // Use CamelCase for the service variable
     private router: Router
   ) {
-    // Get the username from userService and assign it to userName$
-    // Assuming userService has a method to get the current user's name
-    this.userName$ = this.userService.getUserById(this.user.id).pipe(
-      map(user => user.username)
-    );
   }
-  
-  
-  
 
-  
+  ngOnInit(): void {
+    // For testing, let's use the first user in the hardcoded array
+    this.user = this.userService.users[0]; // Assuming the first user is the one you want to display
+  }
   
   onLogout() {
     this.userService.logout().subscribe(

@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { User } from '../../entities/users.entity';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import { Patient } from '../../entities/patient.entites';
+import { Appointment } from '../../entities/appointment.entity';
+import { MedicalRecord } from '../../entities/medical-record.entity';
 
 const API_LINK = 'http://localhost:3000';
 
@@ -9,8 +12,26 @@ const API_LINK = 'http://localhost:3000';
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.medicalRecords=[
+      new MedicalRecord(0,"mother: diabetes , monitor BP",this.patients[0],this.users[1])
+    ]
+    this.appointments=[
+      new Appointment(1, '12/12/2023', '12:15', this.patients[0], this.users[1])
+    ]
+    this.patients=[
+      new Patient(12,"fourat","achour","fouratachour","18 months",7,"fever"),
+      new Patient(10,"yassmine","moubarak","yasminemoubarak","1 month",3,"she throws up constantly")
+    ]
+    this.users=[
+    new User(0,"sarra","sarah.ragguem@insat.ucar.tn",99777666,12345678,"ilefilefilef","teacher",this.appointments,this.patients,this.medicalRecords[0]),
+    new User(1,"ilef","ilef.ragguem@insat.ucar.tn",99888666,12345679,"ilefilefilef","engineer",this.appointments,this.patients,this.medicalRecords[0])
+    ]
+   }
   users : User[] = [] ;
+ patients: Patient[]=[];
+ appointments: Appointment[]=[];
+ medicalRecords: MedicalRecord[]=[];
   getUser(): Observable<User[]> {
     return this.http.get<User[]>(`${API_LINK}/get-all-users`);
   }
@@ -41,7 +62,13 @@ export class UserService {
     // After this, you would typically clear any local session data
   }
 
-  
+  //getCurrentUser(): Observable<User| null> {
+    
+    //const userJson = localStorage.getItem('currentUser');
+    //if (userJson) {
+     // return of(JSON.parse(userJson));
+    //}
+    //return of(null); 
  
+//}
 }
-

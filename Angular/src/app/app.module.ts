@@ -30,6 +30,7 @@ import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ProfileComponent,
     EditProfileComponent,
     SignedInHomeComponent,
-    NavBarConnectedComponent
+    NavBarConnectedComponent,
+   
   ],
   imports: [
     BrowserModule,
@@ -51,6 +53,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     AppRoutingModule,
     CommonModule,
     FormsModule,
+    
     ROUTES,
     BrowserAnimationsModule,
     MatFormFieldModule,

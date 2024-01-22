@@ -8,7 +8,7 @@ export class Appointment {
     public id = 0,
     public date = '',
     public time = '',
-    public patient = Patient,
+    public patient : Patient,
     public user: User
   ) {}
 }

@@ -11,9 +11,10 @@ export class User {
         public cin = 1,
         public password = '',
         public role = '',
-        appointments=Appointment,
-        patients=Patient,
-        medicalRecord=MedicalRecord
-      ) {}
-
+        appointments: Appointment[],
+        patients: Patient[],
+        medicalRecord: MedicalRecord
+  ) {
+    
+  }
 }

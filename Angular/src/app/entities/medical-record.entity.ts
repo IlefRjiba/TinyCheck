@@ -6,7 +6,7 @@ export class MedicalRecord {
   constructor(
     public id = 0,
     public notes = '',
-    public patient = Patient,
+    public patient : Patient,
     public user: User
   ) {}
 }
