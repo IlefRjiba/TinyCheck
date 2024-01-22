@@ -23,8 +23,8 @@
         </div>
         <div class="input-group">
             <label for="BabyAge">Baby's age</label>
-            <input type="number" max="12" [(ngModel)]="AgeOfBaby" id="BabyAge" placeholder="Baby's age" ngModel name="BabyAge" #BabyAgeInput="ngModel" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="BabyAgeInput.invalid && BabyAgeInput.touched"> L'age du bébé ne peut pas dépasser 12ans et le champs ne peut pas être vide </div>
+            <input type="text"[(ngModel)]="AgeOfBaby" id="BabyAge" placeholder="Baby's age" ngModel name="BabyAge" #BabyAgeInput="ngModel" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="BabyAgeInput.invalid && BabyAgeInput.touched"> Ce champs ne peut pas être vide </div>
         </div>
         <div class="input-group">
             <label for="Babyweight">Baby's weight</label>

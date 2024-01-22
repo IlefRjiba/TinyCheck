@@ -8,7 +8,7 @@ export class Patient {
     public name: string = '',
     public lastname: string = '',
     public babyName: string = '',
-    public babyAge: number = 0,
+    public babyAge: string = "",
     public babyWeight: number = 0,
     public Reason: string = '',
     // public patient: Patient,

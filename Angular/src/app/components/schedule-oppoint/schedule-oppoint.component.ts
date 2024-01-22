@@ -27,7 +27,7 @@ export class ScheduleOppointComponent {
   NameOfParent: string = "";
   SurnameOfParent: string = "";
   NameOfBaby: string = "";
-  AgeOfBaby: number = 0;
+  AgeOfBaby: string = "";
   WeightOfBaby: number = 0;
   ReasonOfAppointment: string = "";
   dateOfAppointment = this.calendarService.initializeDate();
@@ -40,6 +40,7 @@ addAppointment(formulaire: NgForm) {
   if (formulaire.valid) {
     this.rdv = new Appointment(this.dateOfAppointment, this.hourOfAppointment);
     this.patient = new Patient(this.NameOfParent, this.SurnameOfParent, this.NameOfBaby, this.AgeOfBaby, this.WeightOfBaby, this.ReasonOfAppointment);
+    console.log(this.patient)
     this.appointmentServie.addAppointment(this.rdv, this.patient);
     this.toastr.success('Rendez-vous ajouté avec succès');
   }

@@ -11,17 +11,13 @@ export class CreatePatientDto {
   @IsString()
   readonly lastname: string;
 
-
-
   @IsNotEmpty()
   @IsString()
   readonly babyName: string;
 
-  @Type(() => Number)
   @IsNotEmpty()
-  @IsNumber()
-  @Max(12)
-  readonly babyAge: number;
+  @IsString()
+  readonly babyAge: string;
 
   @IsNotEmpty()
   @IsNumber()
