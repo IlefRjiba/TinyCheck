@@ -1,5 +1,5 @@
 .backgroundImage{
-    background-image: url("/assets/images/backp.png");
+    background-image: url("/assets/images/backp2.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -46,8 +46,8 @@
 }
 
 .nav-borders .nav-link.active {
-    color: #0061f2;
-    border-bottom-color: #0061f2;
+    color: #f96a8e;
+    border-bottom-color: #f96a8e;
 }
 .nav-borders .nav-link {
     color: #69707a;
@@ -60,4 +60,42 @@
     padding-right: 0;
     margin-left: 1rem;
     margin-right: 1rem;
+}
+.btn-primary {
+    /* background-color: #ff8fab; */
+    background: linear-gradient(to right, #ff8fab, #fa6187);
+    border: none;
+    border-radius: 25px;
+    width: 125px;
+    height: 50px;
+}
+
+.up_active,
+.btn-primary :hover {
+    background-color: white ;
+    border-color: #fa6187 ;
+    color: #fa6187;
+    border-radius: 25px;
+}
+.btn-primary:focus{
+    outline: none !important;
+}
+.btn-secondary {
+    /* background-color: #ff8fab; */
+    background: linear-gradient(to right, #ff8fab, #fa6187);
+    border: none;
+    border-radius: 25px;
+    width: 150px;
+    height: 50px;
+}
+
+.up_active,
+.btn-secondary :hover {
+    background-color: white ;
+    border-color: #fa6187 ;
+    color: #fa6187;
+    border-radius: 25px;
+}
+.btn-secondary:focus{
+    outline: none !important;
 }

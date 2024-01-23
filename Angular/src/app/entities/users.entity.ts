@@ -3,6 +3,10 @@ import { MedicalRecord } from "./medical-record.entity";
 import { Patient } from "./patient.entites";
 
 export class User {
+
+  public appointments: Appointment[];
+  public patients: Patient[];
+  public medicalRecord: MedicalRecord;
     constructor(
         public id = 0,
         public username = '',
@@ -15,6 +19,8 @@ export class User {
         patients: Patient[],
         medicalRecord: MedicalRecord
   ) {
-    
+    this.appointments = appointments;
+    this.patients = patients;
+    this.medicalRecord = medicalRecord;
   }
 }

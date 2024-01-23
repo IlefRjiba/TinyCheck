@@ -23,11 +23,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ProfileComponent } from './profile/profile.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
 import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar-connected.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
 
 
 
@@ -45,7 +45,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     EditProfileComponent,
     SignedInHomeComponent,
     NavBarConnectedComponent,
-   
+    
+    
   ],
   imports: [
     BrowserModule,

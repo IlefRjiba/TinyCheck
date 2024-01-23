@@ -21,7 +21,7 @@ export class NavBarConnectedComponent {
     // For testing, let's use the first user in the hardcoded array
     this.user = this.userService.users[0]; // Assuming the first user is the one you want to display
   }
-  
+
   onLogout() {
     this.userService.logout().subscribe(
       response => {
@@ -35,6 +35,7 @@ export class NavBarConnectedComponent {
       }
     );
   }
+ 
     
   }
   

@@ -17,7 +17,9 @@ export class UserService {
       new MedicalRecord(0,"mother: diabetes , monitor BP",this.patients[0],this.users[1])
     ]
     this.appointments=[
-      new Appointment(1, '12/12/2023', '12:15', this.patients[0], this.users[1])
+      new Appointment(1, '12/12/2023', '12:15', this.patients[0], this.users[0]),
+      new Appointment(1, '12/11/2023', '12:15', this.patients[1], this.users[0]),
+     
     ]
     this.patients=[
       new Patient(12,"fourat","achour","fouratachour","18 months",7,"fever"),
