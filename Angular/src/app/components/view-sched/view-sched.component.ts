@@ -23,28 +23,14 @@ import { ToastrService } from 'ngx-toastr';
   selector: 'app-view-sched',
   templateUrl: './view-sched.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styles: [
-    `
-      h3 {
-        margin: 0 0 10px;
-      }
-
-      pre {
-        background-color: #f5f5f5;
-        padding: 15px;
-      }
-    `,
-  ],
 })
-export class ViewSchedComponent {
+export class ViewSchedComponent implements OnInit {
   constructor(
     private calendarService: CalendarService,
     private appointmentService: AppointmentsService,
     private router: Router,
-    private colors: ColorsService,
     private toastr: ToastrService
   ) {
-    this.events = this.calendarService.events;
   }
 
   selectedDate?: Date;
@@ -52,6 +38,12 @@ export class ViewSchedComponent {
   viewDate: Date = new Date();
   appointments: Appointment[] = [];
   events: CalendarEvent[] = [];
+
+  ngOnInit(): void {
+    this.loadAppointments();
+    this.events = this.calendarService.events;
+    console.log('events------------------------------------',this.events);
+  }
 
   changeDay(date: Date) {
     this.viewDate = date;
@@ -69,6 +61,21 @@ export class ViewSchedComponent {
   }
 
   eventClicked(arg0: CalendarEvent<any>) {
-    this.toastr.error('Cette horaire est déjà réservée');
+    this.toastr.error('This schedule is reserved for another appointment');
   }
+
+  loadAppointments(): void {
+    this.appointmentService.getAppointments().subscribe({
+      next: (data) => {
+        
+        this.appointments = data;
+        this.appointments.forEach(appointment => {
+          this.calendarService.addEvent(appointment);
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching appointments:', err);
+      }
+    });}
+
 }

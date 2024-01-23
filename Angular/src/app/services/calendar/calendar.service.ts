@@ -25,20 +25,16 @@ export class CalendarService {
   formattedDate: string = '';
 
   events: CalendarEvent[] = [];
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-  ];
 
   addEvent(appointment: Appointment): void {
+    
+    const newEventStart = this.returnDate(appointment.date, appointment.time);
+    const eventExists = this.events.some(event => event.start.getTime() === newEventStart.getTime());
+
+    if (!eventExists){
     let newEvent = this.events;
     newEvent.push({
-      title: 'Horaire réservée',
+      title: 'Schedule reserved for another appointment',
       start: this.returnDate(appointment.date, appointment.time),
       color: this.colors.colors['red'],
       draggable: true,
@@ -47,8 +43,11 @@ export class CalendarService {
         afterEnd: true,
       },
     });
-    console.log('events------------------------------------');
-    console.log(newEvent);
+    this.events = newEvent
+  }
+    // console.log('events------------------------------------');
+    // console.log(newEvent);
+    
   }
 
   initializeHour(): string {
