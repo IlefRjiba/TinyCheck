@@ -34,7 +34,7 @@ import { ToastrModule } from 'ngx-toastr';
     SignUpComponent,
     SignInComponent,
     HomePageComponent,
-    CalendarHeaderComponent
+    CalendarHeaderComponent,
   ],
   imports: [
     BrowserModule,
