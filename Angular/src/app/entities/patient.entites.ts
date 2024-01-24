@@ -4,18 +4,17 @@ import { User } from "./users.entity";
 
 export class Patient {
 
-    constructor(
-      public id = 0,
-      public name = '',
-      public lastname = '',
-      public babyname = '',
-      public babyage = '',
-      public babypoid =0,
-      public Reason = '',
-      // public patient = Patient,
-      // public appointments: Appointment[],
-      // public medicalRecord: MedicalRecord,
-      // public user: User[]
-    ) {}
+  constructor(
+    public name: string = '',
+    public lastname: string = '',
+    public Babyname: string = '',
+    public Babyage: string = "",
+    public babypoid: number = 0,
+    public Reason: string,
+    // public patient: Patient,
+    // public appointments: Appointment[],
+    // public medicalRecord: MedicalRecord,
+    // public user: User[]
+    ) { }
+  
   }
-

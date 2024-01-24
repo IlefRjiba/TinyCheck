@@ -1,15 +1,15 @@
 .backgroundImage{
-    background-image: url("/assets/images/sign2.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
+  background-image: url("/assets/images/sign2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 h1{
-    color: #cccccc00;
-    margin-bottom: 0%;
+  color: #cccccc00;
+  margin-bottom: 0%;
 }
 
 .card {
@@ -17,6 +17,7 @@ h1{
     padding: 20px;
     width: 430px;
     height: 610px;
+    height: fit-content;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     text-align: center;
     margin-left: 545px;
@@ -49,22 +50,7 @@ h1{
     color: #82eae3;
   }
   
-  .form-group input[type="email"]::placeholder {
-    color: #6bcdb4;
-}
-
-.form-group input[type="text"]::placeholder {
-  color: #6bcdb4;
-}
   
-  .form-group input[type="password"]::placeholder {
-    color: #6bcdb4;
-}
-  
-  .form-group input[type="number"]::placeholder {
-    color: #6bcdb4;
-}
-
   .submit-button {
     width: 100%;
     background-color: #ff8fab; /* light blue background */
@@ -93,3 +79,14 @@ h1{
     text-decoration: overline;
   }
   
+  input.ng-valid {
+    border: 2px solid #2ecc71 !important;
+    background-color: white !important;
+  }
+  
+  /* Champ invalide */
+  input.ng-invalid.ng-touched {
+    color: white !important;
+    border: 2px solid #e74c3c !important;
+    background-color: #ffaab9;
+  }

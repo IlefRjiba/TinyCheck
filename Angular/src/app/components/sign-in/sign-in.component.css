@@ -72,9 +72,9 @@ h1{
   .forgot-password {
     display: block;
     margin-top: 15px;
-    color: #ff8fab; /* light blue text */
+    color: #ff8fab !important; /* light blue text */
     text-decoration: none;
-    text-decoration: underline;
+    text-decoration: underline !important;
   }
   
   .forgot-password:hover {

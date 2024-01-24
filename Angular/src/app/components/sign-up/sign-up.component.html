@@ -3,30 +3,36 @@
   <div>
     <h1>hey</h1>
     <div class="card">
-      <h2 class="card-header">Sign Up</h2>
-      <form class="form" (ngSubmit)="onSignUp(formulaire)" #formulaire="ngForm">
-        <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="user.username" name="username" required>
-        </div>
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter your email" [(ngModel)]="user.email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label for="number">Phone Number</label>
-          <input type="number" class="form-control" id="number" placeholder="Enter your phone number" [(ngModel)]="user.phone" name="phone" required>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter your password" [(ngModel)]="user.password" name="password" required>
-        </div>
-        <div class="form-group">
-          <label for="passwordconfirm">Confirm your password</label>
-          <input type="password" class="form-control" id="passwordconfirm" placeholder="Confirm your password" [(ngModel)]="user.passwordConfirm" name="passwordConfirm" required>
-        </div>
-        <button type="submit" [disabled]="formulaire.invalid" class="btn submit-button">Envoyer</button>
-      </form>
+        <h2 class="card-header">Sign Up</h2>
+        <form class="form" (ngSubmit)="onSignUp(formulaire)" #formulaire="ngForm">
+          <div class="form-group">
+            <label for="name">Username</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name" [(ngModel)]="user.username" #username="ngModel" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="username.touched&&username.invalid"> Ce champs ne peut pas être vide</div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input email name="email"  type="email" class="form-control" id="email" placeholder="Enter your email" #addresse="ngModel" [(ngModel)]="user.email" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="addresse.touched&&addresse.invalid"> Ce champs ne peut pas être vide et doit être un email</div>
+          </div>
+          <div class="form-group">
+            <label for="number">Phone Number</label>
+            <input min minlength="8" maxlength="8" type="number" [(ngModel)]="user.phone" #phoneNbre="ngModel" class="form-control" id="number" placeholder="Enter your phone number" name="phoneNbre" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="phoneNbre.touched&&phoneNbre.invalid"> Ce champs doit comporter 8 nombres</div>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input minlength="6" type="password" class="form-control" [(ngModel)]="user.password" #psswd="ngModel" id="password" placeholder="Enter your password" name="pwd" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="psswd.touched&&psswd.invalid"> Ce champs doit comporter 6 caractères au minimum</div>
+          </div>
+          <div class="form-group">
+            <label for="passwordconfirm">Confirm your password</label>
+            <input minlength="6" type="password" name="pwd2" class="form-control" id="passwordconfirm" placeholder="Confirm your password" #psswd2="ngModel" [(ngModel)]="user.passwordConfirm" required>
+            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="psswd2.touched&&psswd2.invalid"> Ce champs doit comporter 6 caractères au minimum</div>
+          </div>
+          <button type="submit" [disabled]="formulaire.invalid" class="btn submit-button">Sign Up</button>
+
+        </form>
+      </div>
     </div>
-  </div>
 </div>

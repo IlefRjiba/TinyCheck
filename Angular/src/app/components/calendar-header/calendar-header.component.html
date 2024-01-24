@@ -43,13 +43,6 @@
         </div>
         <div
           class="btn btn-primary"
-          (click)="viewChange.emit(CalendarView.Week)"
-          [class.active]="view === CalendarView.Week"
-        >
-          Week
-        </div>
-        <div
-          class="btn btn-primary"
           (click)="viewChange.emit(CalendarView.Day)"
           [class.active]="view === CalendarView.Day"
         >

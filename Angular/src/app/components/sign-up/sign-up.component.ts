@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
+import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -26,7 +27,7 @@ export class SignUpComponent {
     if (form.invalid) {
       return;
     }
-    
+
     this.UserService.signUp(form.value).subscribe(
       response => {
         console.log('User signed up', response);

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber , IsOptional} from 'class-validator';
 
 export class CreatePatientDto {
   @IsNotEmpty()
@@ -9,18 +9,22 @@ export class CreatePatientDto {
   @IsNotEmpty()
   @IsString()
   readonly lastname: string;
+
+
+
   @IsNotEmpty()
   @IsString()
-  readonly babyName: string;
+  readonly Babyname: string;
+
+  @IsNotEmpty()
+  @IsString()
+  readonly Babyage: string;
 
   @IsNotEmpty()
   @IsNumber()
-  readonly babyAge: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  readonly babyWeight: number;
-  @IsNotEmpty()
+  readonly babypoid: number;
+  
+  @IsOptional()
   @IsString()
   Reason: string;
 }

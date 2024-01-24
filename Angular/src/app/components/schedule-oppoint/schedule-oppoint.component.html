@@ -1,58 +1,179 @@
-<div class="backgroundImage" style="background-color: rgb(127, 6, 26) !important;">
-<div class="form-container ">
+<div
+  class="backgroundImage"
+  style="background-color: rgb(127, 6, 26) !important"
+>
+  <div class="form-container">
     <form class="appointment-form" #formulaire="ngForm">
-        <h2 class="form-header">Appointment Form</h2>
+      <h2 class="form-header">Appointment Form</h2>
 
-        <!-- Parent's info -->
-        <div class="input-group">
-            <label for="parentName">Parent's Name</label>
-            <input type="text" id="parentName" placeholder="Parent's Name" ngModel name="parentName" #ParentName="ngModel" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="ParentName.invalid && ParentName.touched"> Ce champs ne peut pas être vide</div>
+      <!-- Parent's info -->
+      <div class="input-group">
+        <label for="parentName">Parent's Name</label>
+        <input
+          type="text"
+          id="parentName"
+          [(ngModel)]="NameOfParent"
+          placeholder="Parent's Name"
+          ngModel
+          name="parentName"
+          #ParentName="ngModel"
+          required
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="ParentName.invalid && ParentName.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        <div class="input-group">
-            <label for="parentSurname">Parent's Surname</label>
-            <input type="text" id="parentSurname" placeholder="Parent's Surname" required ngModel name="parentSurname" #ParentSurname="ngModel">
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="ParentSurname.invalid && ParentSurname.touched"> Ce champs ne peut pas être vide</div>
+      </div>
+      <div class="input-group">
+        <label for="parentSurname">Parent's Surname</label>
+        <input
+          type="text"
+          id="parentSurname"
+          placeholder="Parent's Surname"
+          required
+          ngModel
+          name="parentSurname"
+          #ParentSurname="ngModel"
+          [(ngModel)]="SurnameOfParent"
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="ParentSurname.invalid && ParentSurname.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
+      </div>
 
-        <!-- Baby's info -->
-        <div class="input-group">
-            <label for="BabyName">Baby's name</label>
-            <input type="text" id="BabyName" placeholder="Baby's name" ngModel name="BabyName" required #BabyName="ngModel">
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="BabyName.invalid && BabyName.touched"> Ce champs ne peut pas être vide</div>
+      <!-- Baby's info -->
+      <div class="input-group">
+        <label for="BabyName">Baby's name</label>
+        <input
+          type="text"
+          id="BabyName"
+          [(ngModel)]="NameOfBaby"
+          placeholder="Baby's name"
+          ngModel
+          name="BabyName"
+          required
+          #BabyName="ngModel"
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="BabyName.invalid && BabyName.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        <div class="input-group">
-            <label for="BabyAge">Baby's age</label>
-            <input type="number" max="12" id="BabyAge" placeholder="Baby's age" ngModel name="BabyAge" #BabyAgeInput="ngModel" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="BabyAgeInput.invalid && BabyAgeInput.touched"> L'age du bébé ne peut pas dépasser 12ans et le champs ne peut pas être vide </div>
+      </div>
+      <div class="input-group">
+        <label for="BabyAge">Baby's age</label>
+        <input
+          type="text"
+          [(ngModel)]="AgeOfBaby"
+          id="BabyAge"
+          placeholder="Baby's age"
+          ngModel
+          name="BabyAge"
+          #BabyAgeInput="ngModel"
+          required
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="BabyAgeInput.invalid && BabyAgeInput.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        <div class="input-group">
-            <label for="Babyweight">Baby's weight</label>
-            <input type="number" id="Babyweight" placeholder="Baby's weight" ngModel name="Babyweight" #BabyWeight="ngModel" required>
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="BabyWeight.invalid && BabyWeight.touched"> Ce champs ne peut pas être vide</div>
+      </div>
+      <div class="input-group">
+        <label for="Babyweight">Baby's weight</label>
+        <input
+          type="number"
+          id="Babyweight"
+          placeholder="Baby's weight"
+          ngModel
+          name="Babyweight"
+          [(ngModel)]="WeightOfBaby"
+          #BabyWeight="ngModel"
+          required
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="BabyWeight.invalid && BabyWeight.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        <div class="input-group">
-            <label for="reason">Reason of appointment</label>
-            <textarea rows="1" id="reason" placeholder="Reason of appointment" ngModel name="reasonOfAppointment"></textarea>
+      </div>
+      <div class="input-group">
+        <label for="reason">Reason of appointment</label>
+        <textarea
+          rows="1"
+          id="reason"
+          placeholder="Reason of appointment"
+          ngModel
+          name="reasonOfAppointment"
+          [(ngModel)]="ReasonOfAppointment"
+        ></textarea>
+      </div>
+
+      <!-- Appointment info -->
+      <div class="input-group">
+        <label for="appointmentDate">Date of Appointment</label>
+        <input
+          type="date"
+          id="appointmentDate"
+          name="dateOfAppointment"
+          [(ngModel)]="dateOfAppointment"
+          required
+          #date="ngModel"
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="date.invalid && date.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        
-        <!-- Appointment info -->
-        <div class="input-group">
-            <label for="appointmentDate">Date of Appointment</label>
-            <input type="date" id="appointmentDate" name='dateOfAppointment' [(ngModel)]="dateOfAppointment" required #date="ngModel">
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="date.invalid && date.touched"> Ce champs ne peut pas être vide</div>
+      </div>
+      <div class="input-group">
+        <label for="appointmentTime">Hour of Appointment</label>
+        <input
+          type="time"
+          id="appointmentTime"
+          ngModel
+          name="hourOfAppointment"
+          [(ngModel)]="hourOfAppointment"
+          required
+          #hour="ngModel"
+        />
+        <div
+          style="height: 10px; font-size: 10px; color: rgb(239, 8, 43)"
+          *ngIf="hour.invalid && hour.touched"
+        >
+          Ce champs ne peut pas être vide
         </div>
-        <div class="input-group">
-            <label for="appointmentTime">Hour of Appointment</label>
-            <input type="time" id="appointmentTime" ngModel name="hourOfAppointment" [(ngModel)]="hourOfAppointment" required #hour="ngModel">
-            <div style="height: 10px; font-size: 10px; color: rgb(239, 8, 43);" *ngIf="hour.invalid && hour.touched"> Ce champs ne peut pas être vide</div>
-        </div>
-        
-        <span style="align-items:stretch !important;">
-        <button type="submit" style="background-color: #ff8fab; margin:3px" (click)="addAppointment(formulaire)" >Submit</button>
-        <button (click)="backToSchedule()" style="margin:3px; background-color: #0bc672">View doctor's schedule</button>
-        <button (click)="resetForm(formulaire)" style="background-color: #c10b39; margin:3px" >Reset the form</button>
-        </span>
+      </div>
+
+      <span style="align-items: stretch !important">
+        <button
+          type="submit"
+          style="background-color: #ff8fab; margin: 3px"
+          (click)="addAppointment(formulaire)"
+        >
+          Submit
+        </button>
+        <button
+          (click)="backToSchedule()"
+          style="margin: 3px; background-color: #0bc672"
+        >
+          Return to the doctor's schedule
+        </button>
+        <button
+          (click)="resetForm(formulaire)"
+          style="background-color: #c10b39; margin: 3px"
+        >
+          Reset the form
+        </button>
+      </span>
     </form>
-</div>
+  </div>
 </div>

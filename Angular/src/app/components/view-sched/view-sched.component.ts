@@ -1,87 +1,80 @@
-import { UserService } from '../../services/user/user.service';
-import { User } from '../../entities/users.entity';
-import { ActivatedRoute, Router } from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {FlatpickrModule} from 'angularx-flatpickr';
-  import {
-    Component,
-    ChangeDetectionStrategy,
-    ViewChild,
-    TemplateRef,
-    Input,
-    OnInit,
-  } from '@angular/core';
-  import { startOfDay, endOfDay, subDays, addDays,endOfMonth,isSameDay,isSameMonth,addHours } from 'date-fns';
-  import { Subject } from 'rxjs';
-  import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-  import {
-    CalendarEvent,
-    CalendarEventAction,
-    CalendarEventTimesChangedEvent,
-    CalendarView,
-  } from 'angular-calendar';
-  import { EventColor } from 'calendar-utils';
-  import { CalendarService } from '../../services/calendar/calendar.service';
-  
-  const colors: Record<string, EventColor> = {
-    red: {
-      primary: '#ad2121',
-      secondary: '#FAE3E3',
-    },
-    blue: {
-      primary: '#1e90ff',
-      secondary: '#D1E8FF',
-    },
-    yellow: {
-      primary: '#e3bc08',
-      secondary: '#FDF1BA',
-    },
-  };
-  
-  @Component({
-    selector: 'app-view-sched',
-    templateUrl: './view-sched.component.html',
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    styles: [
-      `
-        h3 {
-          margin: 0 0 10px;
-        }
-  
-        pre {
-          background-color: #f5f5f5;
-          padding: 15px;
-        }
-      `,
-    ]
-  })
+import { Router } from '@angular/router';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  ViewChild,
+  TemplateRef,
+  Input,
+  OnInit,
+} from '@angular/core';
+import {
+  CalendarEvent,
+  CalendarEventAction,
+  CalendarEventTimesChangedEvent,
+  CalendarView,
+} from 'angular-calendar';
+import { CalendarService } from '../../services/calendar/calendar.service';
+import { ColorsService } from 'src/app/services/colors/colors.service';
+import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
+import { Appointment } from 'src/app/entities/appointment.entity';
+import { ToastrService } from 'ngx-toastr';
 
-export class ViewSchedComponent {
-
-  constructor(private calendarService : CalendarService , private router : Router ){
-    this.events=this.calendarService.events
+@Component({
+  selector: 'app-view-sched',
+  templateUrl: './view-sched.component.html',
+})
+export class ViewSchedComponent implements OnInit {
+  constructor(
+    private calendarService: CalendarService,
+    private appointmentService: AppointmentsService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
   }
 
-  hourSelected(arg0: Date) {
-      this.calendarService.chosenDate = arg0;
-      this.calendarService.chosenDateByUser = true;
-      console.log('hourselected-----------------------')
-      console.log(this.calendarService.chosenDate)
-      this.calendarService.updateTime()
-      this.router.navigate(['/schedule']);
-  }
-
-  selectedDate ?: Date
+  selectedDate?: Date;
   view: CalendarView = CalendarView.Month;
-
   viewDate: Date = new Date();
-
+  appointments: Appointment[] = [];
   events: CalendarEvent[] = [];
+
+  ngOnInit(): void {
+    this.loadAppointments();
+    this.events = this.calendarService.events;
+    console.log('events------------------------------------',this.events);
+  }
 
   changeDay(date: Date) {
     this.viewDate = date;
     this.view = CalendarView.Day;
     this.calendarService.chosenDate = date;
   }
-  
+
+  hourSelected(arg0: Date) {
+    this.calendarService.chosenDate = arg0;
+    this.calendarService.chosenDateByUser = true;
+    console.log('hourselected-----------------------');
+    console.log(this.calendarService.chosenDate);
+    this.calendarService.updateTime();
+    this.router.navigate(['/schedule']);
+  }
+
+  eventClicked(arg0: CalendarEvent<any>) {
+    this.toastr.error('This schedule is reserved for another appointment');
+  }
+
+  loadAppointments(): void {
+    this.appointmentService.getAppointments().subscribe({
+      next: (data) => {
+        
+        this.appointments = data;
+        this.appointments.forEach(appointment => {
+          this.calendarService.addEvent(appointment);
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching appointments:', err);
+      }
+    });}
+
 }

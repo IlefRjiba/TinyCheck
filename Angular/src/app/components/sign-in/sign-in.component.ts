@@ -1,7 +1,9 @@
 import { Component, NgModule } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
+import { FormBuilder, FormGroup, NgForm, FormsModule } from '@angular/forms';
+import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',

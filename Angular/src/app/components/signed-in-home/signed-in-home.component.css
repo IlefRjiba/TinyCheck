@@ -1,0 +1,135 @@
+.backgroundImage{
+    background-image: url("/assets/images/backp2.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 150%;
+    width: 100%;
+}
+
+.body{margin-top:20px;
+    padding-top:80px;
+    }
+    .welcome-banner {
+        position: relative;
+        text-align: center;
+        color: #FFF;
+        /* Adjust the padding-top to position the content within the darker pink zone */
+        padding-top: 50px; /* This value may need to be adjusted */
+      }
+    .welcome-banner h1 {
+        font-size: 2.5rem; /* Adjust as necessary */
+        color: #ff6b81; /* A color to match the darker pink zone */
+        margin-bottom: 20px;
+        font-weight: bold;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a shadow for better legibility */
+      }
+      
+      .welcome-banner p {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        color: #180e57; /* White color for text */
+        margin-bottom: 30px; /* Space before the sign-in/sign-up links */
+      }
+      .card-container {
+        margin-top: 70px; /* Add more margin to the top of the card container to push it down */
+    }
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 8px 0px;
+        position: relative;
+        margin-bottom: 1.56rem;
+    }
+    .card {
+        position: relative;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        min-width: 0px;
+        overflow-wrap: break-word;
+        background-color: rgb(248, 248, 248);
+        background-clip: border-box;
+        border: 0px solid rgba(0, 0, 0, 0.125);
+        border-radius: 0.57rem;
+    }
+    .bg-primary {
+        background-color: rgb(240, 194, 75) !important;
+    }
+    .mb-9 {
+        margin-bottom: 4.96rem !important;
+    }
+    
+    .card-icon-border-large {
+        width: 100px;
+        height: 100px;
+        margin: -3.06rem auto 0px;
+        text-align: center;
+        background-color: rgb(255, 255, 255);
+        border: 6px solid;
+        border-radius: 50%;
+        font-size: 1.88rem;
+        line-height: 90px;
+        color: rgb(102, 102, 102);
+    }
+    .mtn-80 {
+        margin-top: -5rem !important;
+    }
+    .border-primary {
+        border-color: rgb(240, 194, 75) !important;
+    }
+    
+    .text-primary {
+        color: rgb(240, 194, 75) !important;
+    }
+    
+    .bg-success {
+        background-color: rgb(181, 213, 106) !important;
+    }
+    .border-success {
+        border-color: rgb(181, 213, 106) !important;
+    }
+    .text-success {
+        color: rgb(181, 213, 106) !important;
+    }
+    
+    .bg-danger {
+        background-color: rgb(234, 112, 102) !important;
+    }
+    .border-danger {
+        border-color: rgb(234, 112, 102) !important;
+    }
+    .text-danger {
+        color: rgb(234, 112, 102) !important;
+    }
+    
+    .bg-info {
+        background-color: rgb(132, 190, 214) !important;
+    }
+    .border-info {
+        border-color: rgb(132, 190, 214) !important;
+    }
+    .text-info {
+        color: rgb(132, 190, 214) !important;
+    }
+    
+    
+    .bg-purple {
+        background-color: rgb(165, 151, 231) !important;
+    }
+    .border-purple {
+        border-color: rgb(165, 151, 231) !important;
+    }
+    .text-purple {
+        color: rgb(165, 151, 231) !important;
+    }
+    
+    
+    .bg-pink {
+        background-color: rgb(234, 119, 173) !important;
+    }
+    .border-pink {
+        border-color: rgb(234, 119, 173) !important;
+    }
+    .text-pink {
+        color: rgb(234, 119, 173) !important;
+    }

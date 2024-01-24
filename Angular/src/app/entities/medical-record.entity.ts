@@ -4,11 +4,11 @@ import { User } from "./users.entity";
 
 export class MedicalRecord {
   constructor(
-    public id = 0,
-    public notes = '',
-    public patient = Patient,
+    public id: number = 0,
+    public notes: string = '',
+    public patient: Patient,
     public user: User
-  ) {}
+  ) {}  
 }
 
 

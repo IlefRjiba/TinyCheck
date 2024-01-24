@@ -9,6 +9,7 @@ import {Role} from "../enums/role.enum";
 
 const adminUser : CreateUserDto = {email: 'admin@gmail.com', username: 'superAdmin', password: 'admin12', phone: 27028075}
 
+
 @Injectable()
 export class AuthService implements OnModuleInit  {
 
@@ -32,6 +33,7 @@ export class AuthService implements OnModuleInit  {
         }
     
 
+    
     
 
     async register (dto: CreateUserDto) {
@@ -67,6 +69,7 @@ export class AuthService implements OnModuleInit  {
     }
 
 
+    
     
     async checkAuth (userData) {
         const payload = {email: userData.email, userId: userData.userId, username: userData.username, role: userData.role}

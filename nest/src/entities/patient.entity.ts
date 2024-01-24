@@ -16,9 +16,9 @@ export class Patient {
   @Column()
   babyName: string;
   @Column()
-  babyAge: number;
+  Babyage: string;
   @Column()
-  babyWeight: number;
+  babypoid: number;
   
   @Column()
   Reason: string;
