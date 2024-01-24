@@ -22,7 +22,6 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-view-sched',
   templateUrl: './view-sched.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ViewSchedComponent implements OnInit {
   constructor(
