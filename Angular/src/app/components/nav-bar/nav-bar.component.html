@@ -26,11 +26,11 @@
                 </li>
 
                 <span class="buttons">
-                <button type="button" class="btn btn-primary btn-signin" [routerLink]="['signIn']" routerLinkActive="in_active"  (click)="loginUser()" [disabled]="isLoggedIn">Sign In</button>
-                <button type="button" class="btn  btn-signup" [routerLink]="['signUp']" routerLinkActive="up_active" [disabled]="isLoggedIn">Sign Up</button>
+                <button type="button" class="btn btn-primary btn-signin" [routerLink]="['signIn']" *ngIf="!isLoggedIn" routerLinkActive="in_active"  (click)="loginUser()" [disabled]="isLoggedIn">Sign In</button>
+                <button type="button" class="btn  btn-signup" [routerLink]="['signUp']" routerLinkActive="up_active" *ngIf="!isLoggedIn">Sign Up</button>
               </span>
 
-                <img src="/assets/images/profile_pic.jpg" alt="profile pic">
+                <img src="/assets/images/profile_pic.jpg" *ngIf="isLoggedIn" alt="profile pic">
             </ul>
         </div>
     </nav>

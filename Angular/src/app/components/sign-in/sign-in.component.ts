@@ -23,7 +23,7 @@ export class SignInComponent {
       this.UserService.signIn(email, password).subscribe({
         next: (response) => {
           // La connexion a réussi, vous pouvez maintenant rediriger l'utilisateur ou effectuer d'autres actions
-          this.router.navigate(['/home']);
+          this.router.navigate(['/signedInHome']);
         },
         error:(error) => {
           console.error('Sign in failed :(', error);

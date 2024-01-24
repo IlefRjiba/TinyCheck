@@ -13,7 +13,7 @@ export class SignUpComponent {
   user = {
     username: '',
     email: '',
-    phone: '',
+    phone : 0,
     password: '',
     passwordConfirm: ''
   };
@@ -24,19 +24,24 @@ export class SignUpComponent {
 
 
   onSignUp(form: NgForm) {
+    console.log(form.value);
     if (form.invalid) {
       return;
     }
 
     this.UserService.signUp(form.value).subscribe(
-      response => {
-        console.log('User signed up', response);
-        this.router.navigate(['/home']);
-        // Vous pouvez ici rediriger l'utilisateur ou afficher un message de succès
-      },
-      error => {
-        console.error('Sign up failed', error);
-      }
+      {
+        next: response => {
+          console.log('User signed up', response);
+          this.router.navigate(['/signIn']);
+          // Vous pouvez ici rediriger l'utilisateur ou afficher un message de succès
+        },
+        error: error => {
+          console.error('Sign up failed', error);
+          console.log(form.value)
+        }
+
+       }
     );
   }
 }
