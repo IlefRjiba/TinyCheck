@@ -6,6 +6,8 @@ import {HttpClient} from '@angular/common/http';
 import { Patient } from '../../entities/patient.entites';
 import { Appointment } from '../../entities/appointment.entity';
 import { MedicalRecord } from '../../entities/medical-record.entity';
+import { jwtDecode } from 'jwt-decode';
+
 
 const API_LINK = 'http://localhost:3000';
 
@@ -72,7 +74,15 @@ export class UserService {
   signUp(user: User): Observable<User> {
     return this.http.post<User>(API_LINK + '/user/create-user', user);
   }
- 
+  getCurrentUserId(): number | null {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
+
+      return decodedToken.userId;
+    }
+    return null;
+  }
   signIn(email: string, password: string): Observable<any> {
     return this.http.post<any>(API_LINK + '/auth/login', { email, password }).pipe(
       tap(response => {

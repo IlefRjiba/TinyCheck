@@ -3,6 +3,7 @@ import { UserService } from '../../services/user/user.service';
 import { FormBuilder, FormGroup, NgForm, FormsModule } from '@angular/forms';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-in',
@@ -13,6 +14,7 @@ export class SignInComponent {
   email: string = ''; // Initialisation avec une chaîne vide
   password: string = '';
   constructor( private UserService: UserService,
+    private toastr: ToastrService,
     private router: Router) {}
 
     onSignIn(form: NgForm) {
@@ -24,9 +26,11 @@ export class SignInComponent {
         next: (response) => {
           // La connexion a réussi, vous pouvez maintenant rediriger l'utilisateur ou effectuer d'autres actions
           this.router.navigate(['/signedInHome']);
+
         },
         error:(error) => {
           console.error('Sign in failed :(', error);
+          this.toastr.error('Please, Verify your contact details');
         }
     });
     }
