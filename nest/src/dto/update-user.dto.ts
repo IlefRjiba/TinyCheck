@@ -9,7 +9,6 @@ export class UpdateUserDto {
     email: string;
 
     @IsString( {message: 'must be a string'})
-    @Length(6, 15, {message: 'must be longer than or equal to 6 characters'})
     username: string;
     
     @IsString()

@@ -1,4 +1,5 @@
 import { Component, NgModule } from '@angular/core';
+import { UserService } from '../../services/user/user.service';
 import { FormBuilder, FormGroup, NgForm, FormsModule } from '@angular/forms';
 import { NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,32 +10,30 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent {
+  email: string = ''; // Initialisation avec une chaîne vide
+  password: string = '';
 
-
-email !: string;
-password !: string;
-
-invalidEmail : boolean = false;
+  invalidEmail : boolean = false;
 invalidPassword : boolean = false;
 shortPassword : boolean = false;
 
-constructor( private router : Router) { }
+  constructor( private UserService: UserService,
+    private router: Router) {}
 
-signIn(formulaire : NgForm) {
- console.log(this.email)
- console.log(this.password)
- if (this.email.length == 0) {
-   this.invalidEmail = true;
- }
- if (this.password.length == 0) {
-  this.invalidPassword = true;
-}
-if (this.password.length < 8) {
-  this.shortPassword = true;}
-}
-
-signUp() {
-  this.router.navigate(['signUp']);
+  onSignIn(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+    this.UserService.signIn(form.value.email, form.value.password).subscribe(
+      response => {
+        console.log('User signed in', response);
+        localStorage.setItem('token', response.token);
+        this.router.navigate(['/home']);
+        // Redirigez l'utilisateur ou affichez un message de bienvenue
+      },
+      error => {
+        console.error('Sign in failed', error);
+      }
+    );
   }
-
 }

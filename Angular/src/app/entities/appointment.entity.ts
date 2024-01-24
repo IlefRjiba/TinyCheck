@@ -8,7 +8,9 @@ export class Appointment {
     // public id: number = 0,
     public date: string = '',
     public time: string = '',
-    // public patient: Patient,
-    // public user: User = new User()
+    public patient: Patient,
+    public user: User 
+    //ilef needs current user to uncomment this 
+    //public user: User = new User()
   ) {}
 }

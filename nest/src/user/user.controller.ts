@@ -3,20 +3,28 @@
 import { Controller, Get, Post, Body, Param, UseGuards, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { LoginUserDto } from '../dto/login-user.dto';
 import { User } from '../entities/user.entity';
 import { AuthGuard } from "../auth/auth-jwt.guard";
 import { Roles } from "../auth/auth-role.decorator";
 import { RoleGuard } from "../auth/roles.guard";
 import { Role } from "../enums/role.enum";
 import { UpdateUserDto } from "../dto/update-user.dto";
-
+import { AuthService } from '../auth/auth.service';
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService,
+    private authService: AuthService) {}
 
   @Post('create-user')
   async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
-    return await this.userService.createUser(createUserDto);
+    const user = await this.userService.createUser(createUserDto);
+    return user;
+  }
+
+  @Post('auth/login')
+  async login(@Body() loginDto:  LoginUserDto ): Promise<any> {
+    return this.authService.login(loginDto);
   }
 
   @Roles(Role.Admin)

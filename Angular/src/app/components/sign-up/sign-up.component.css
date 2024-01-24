@@ -1,15 +1,15 @@
 .backgroundImage{
-    background-image: url("/assets/images/sign2.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100%;
-    width: 100%;
+  background-image: url("/assets/images/sign2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100%;
+  width: 100%;
 }
 
 h1{
-    color: #cccccc00;
-    margin-bottom: 0%;
+  color: #cccccc00;
+  margin-bottom: 0%;
 }
 
 .card {
@@ -22,7 +22,6 @@ h1{
     text-align: center;
     margin-left: 545px;
     margin-top: 0px;
-
   }
   
   .card-header {
@@ -50,8 +49,8 @@ h1{
     border: 1px solid #ccc;
     color: #82eae3;
   }
- 
-
+  
+  
   .submit-button {
     width: 100%;
     background-color: #ff8fab; /* light blue background */

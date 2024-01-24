@@ -6,6 +6,8 @@ import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
 import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { User } from '../../entities/users.entity';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-schedule-oppoint',
@@ -18,13 +20,16 @@ export class ScheduleOppointComponent {
     private toastr: ToastrService,
     private calendarService: CalendarService,
     private router: Router,
-    private appointmentServie: AppointmentsService
+    private appointmentServie: AppointmentsService,
+    private userService: UserService
+
   ) {}
 
   viewform: boolean = true;
 
   rdv!: Appointment;
   patient!: Patient;
+  user!: User;
 
   NameOfParent: string = '';
   SurnameOfParent: string = '';
@@ -40,7 +45,7 @@ export class ScheduleOppointComponent {
       const rdvDate = this.calendarService
         .returnDate(this.dateOfAppointment, this.hourOfAppointment)
         .toISOString();
-      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment);
+    
       this.patient = new Patient(
         this.NameOfParent,
         this.SurnameOfParent,
@@ -49,6 +54,7 @@ export class ScheduleOppointComponent {
         this.WeightOfBaby,
         this.ReasonOfAppointment
       );
+      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user);
       this.appointmentServie.addAppointment(this.rdv, this.patient);
     } else {
       this.toastr.error('Veuillez remplir tous les champs correctement');
@@ -65,4 +71,9 @@ export class ScheduleOppointComponent {
   backToSchedule() {
     this.router.navigate(['/viewOppointments']);
   }
+  ngOnInit(): void {
+    // For testing, let's use the first user in the hardcoded array
+    this.user = this.userService.users[0]; // Assuming the first user is the one you want to display
+  }
+
 }
