@@ -15,6 +15,7 @@ export class PatientsController {
 @Post()
 create(@Body() createPatientDto: CreatePatientDto) {
   return this.patientsService.create(createPatientDto);
+  
 }
 
 @Roles(Role.Admin)

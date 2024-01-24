@@ -14,11 +14,11 @@ export class Patient {
   lastname: string;
  
   @Column()
-  Babyname: string;
+  babyName: string;
   @Column()
-  Babyage: number;
+  babyAge: number;
   @Column()
-  Babypoid: number;
+  babyWeight: number;
   
   @Column()
   Reason: string;
