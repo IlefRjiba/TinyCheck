@@ -18,7 +18,7 @@ export class NavBarConnectedComponent {
   }
 
   ngOnInit(): void {
-    const currentUserId = this.userService.getCurrentUserId();
+    const currentUserId = this.userService.getCurrentUserId() ?? 0;
     if (currentUserId !== 0) {
       // Fetch the user information using the current user ID
       this.userService.getUserById(currentUserId).subscribe(
@@ -32,11 +32,13 @@ export class NavBarConnectedComponent {
     }
     
   }
-
-
-
-
-
+    
   }
+
+
+
+
+
+  
 
 

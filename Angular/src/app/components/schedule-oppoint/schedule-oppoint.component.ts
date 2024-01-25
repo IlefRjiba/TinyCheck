@@ -74,7 +74,7 @@ export class ScheduleOppointComponent {
 
   ngOnInit(): void {
     const currentUserId = this.userService.getCurrentUserId();
-    if (currentUserId !== 0) {
+    if (currentUserId !== null && currentUserId !== 0) {
       // Fetch the user information using the current user ID
       this.userService.getUserById(currentUserId).subscribe(
         (user: User) => {

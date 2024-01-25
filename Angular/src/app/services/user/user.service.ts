@@ -46,15 +46,7 @@ export class UserService {
     );
   }
 
- getCurrentUserId(): number | null {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
-
-      return decodedToken.sub;
-    }
-    return null;
-  }
+ 
 
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${API_LINK}/user/get-user/${userId}`);
@@ -64,11 +56,15 @@ export class UserService {
     return this.http.post<User>(API_LINK + '/user/create-user', user);
 
   }
-  getCurrentUserId(): number  {
-    const token = localStorage.getItem('authToken');
+  getCurrentUserId(): number | null {
+    const token = localStorage.getItem('token');
     if (token) {
       const decodedToken: any = jwtDecode(token);
 
+      return decodedToken.sub;
+    }
+    return null;
+  }
   signIn(email: string, password: string): Observable<any> {
 
     return this.http.post<any>(`${API_LINK}/auth/login`, { email, password }).pipe(
