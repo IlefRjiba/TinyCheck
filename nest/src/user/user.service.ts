@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // users.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
@@ -23,8 +23,15 @@ export class UserService {
     await this.userRepository.update(userId, { ...dto, role: dto.role as Role });
   }
 
-  async getUserById(userId): Promise<User> {
-    return await this.userRepository.findOne(userId);
+  async getUserById(userId: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id: userId})
+
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    return user;
   }
 
   async getUserByEmail(email): Promise<User> {
