@@ -45,7 +45,7 @@ export class ScheduleOppointComponent {
       const rdvDate = this.calendarService
         .returnDate(this.dateOfAppointment, this.hourOfAppointment)
         .toISOString();
-    
+
       this.patient = new Patient(
         this.NameOfParent,
         this.SurnameOfParent,
@@ -71,9 +71,11 @@ export class ScheduleOppointComponent {
   backToSchedule() {
     this.router.navigate(['/viewOppointments']);
   }
+
   ngOnInit(): void {
     // For testing, let's use the first user in the hardcoded array
-    this.user = this.userService.users[0]; // Assuming the first user is the one you want to display
+    this.user = this.userService.users[0];
+    // Assuming the first user is the one you want to display
   }
 
 }
