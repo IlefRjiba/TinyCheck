@@ -45,7 +45,7 @@ export class ScheduleOppointComponent {
       const rdvDate = this.calendarService
         .returnDate(this.dateOfAppointment, this.hourOfAppointment)
         .toISOString();
-    
+
       this.patient = new Patient(
         this.NameOfParent,
         this.SurnameOfParent,
@@ -71,6 +71,7 @@ export class ScheduleOppointComponent {
   backToSchedule() {
     this.router.navigate(['/viewOppointments']);
   }
+
   ngOnInit(): void {
     const currentUserId = this.userService.getCurrentUserId();
     if (currentUserId !== 0) {

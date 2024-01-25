@@ -31,6 +31,9 @@ export class SignUpComponent {
       return;
     }
 
+
+ 
+
     this.UserService.signUp(form.value).subscribe({
       next: (response) => {
         console.log('User signed up', response);
@@ -47,5 +50,6 @@ export class SignUpComponent {
         this.toastr.error('This email is already in use.');
       },
     });
+
   }
 }
