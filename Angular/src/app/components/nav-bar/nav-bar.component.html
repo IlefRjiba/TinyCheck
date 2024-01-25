@@ -24,6 +24,9 @@
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['schedule']" routerLinkActive="active"  [ngClass]="{'disabled-link': !isLoggedIn}">Schedule an oppointment</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" [routerLink]="['viewProfile']" *ngIf="isLoggedIn" routerLinkActive="active"  >View Profile</a>
+                </li>
 
                 <span class="buttons">
                 <button type="button" class="btn btn-primary btn-signin" [routerLink]="['signIn']" *ngIf="!isLoggedIn" routerLinkActive="in_active"  (click)="loginUser()" [disabled]="isLoggedIn">Sign In</button>
