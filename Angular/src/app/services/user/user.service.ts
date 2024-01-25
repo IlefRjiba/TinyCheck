@@ -65,7 +65,15 @@ export class UserService {
     return this.http.put<User>(`${API_LINK}/user/update-user/${userId}`, updatedUser);
   }
 
+ getCurrentUserId(): number | null {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken: any = jwtDecode(token);
 
+      return decodedToken.sub;
+    }
+    return null;
+  }
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${API_LINK}/user/get-user/${userId}`);
   }
@@ -73,22 +81,18 @@ export class UserService {
 
   signUp(user: User): Observable<User> {
     return this.http.post<User>(API_LINK + '/user/create-user', user);
-  }
-  getCurrentUserId(): number | null {
-    const token = localStorage.getItem('authToken');
-    if (token) {
-      const decodedToken: any = jwtDecode(token);
 
-      return decodedToken.userId;
-    }
-    return null;
   }
+
   signIn(email: string, password: string): Observable<any> {
-    return this.http.post<any>(API_LINK + '/auth/login', { email, password }).pipe(
+    return this.http.post<any>(`${API_LINK}/auth/login`, { email, password }).pipe(
       tap(response => {
-        if (response.access_token) {
+        if (response && response.access_token) {
           localStorage.setItem('token', response.access_token);
+          console.log(response.access_token);
           this.authStatusListener.next(true);
         }
       })
-    );}}
+    );
+  }
+  }

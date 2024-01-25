@@ -36,6 +36,7 @@ export class SignUpComponent {
       {
         next: response => {
           console.log('User signed up', response);
+          
           this.router.navigate(['/signIn']);
           this.toastr.success('Welcome, please sign in');
           // Vous pouvez ici rediriger l'utilisateur ou afficher un message de succès
@@ -48,7 +49,7 @@ export class SignUpComponent {
             // par exemple: if (error.error.message.includes('email already exists'))
             this.toastr.error('This email is already in use.');
 
-          
+
 
         }
 
