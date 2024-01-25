@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 // user.controller.ts
-import { Controller, Get, Post, Body, Param, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Put, ParseIntPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 
@@ -24,7 +24,7 @@ export class UserController {
 
 
   @Roles(Role.Admin)
-  @UseGuards(AuthGuard, RoleGuard)
+  // @UseGuards(AuthGuard, RoleGuard)
   @Put('update-user/:userId')
   async updateUser(
     @Param('userId') userId,
@@ -34,9 +34,10 @@ export class UserController {
   }
 
   @Get('get-user/:userId')
-  async getUserById(@Param('userId') userId): Promise<User> {
-    return await this.userService.getUserById(userId);
+  getUserById(@Param('userId', ParseIntPipe) userId: number): Promise<User> {
+    return this.userService.getUserById(userId);
   }
+
 
   @Roles(Role.Admin)
   // @UseGuards(AuthGuard, RoleGuard)
@@ -45,3 +46,4 @@ export class UserController {
     return await this.userService.getAllUsers();
   }
 }
+
