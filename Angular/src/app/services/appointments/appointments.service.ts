@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endOfDay, startOfDay } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
@@ -20,27 +20,46 @@ export class AppointmentsService {
   ) {}
   apiLinkAppointment = 'http://localhost:3000/appointment';
   apiLinkPatient = 'http://localhost:3000/patients';
-
+  patientId!: number;
+  
   getAppointments(): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(this.apiLinkAppointment);
   }
 
-  addAppointment(rdv: Appointment, patient: Patient) {
-    const appointmentRequest = this.http.post(this.apiLinkAppointment, rdv);
-    const patientRequest = this.http.post(this.apiLinkPatient, patient);
-
-    forkJoin([appointmentRequest, patientRequest]).subscribe({
-      next: () => {
-        this.toastr.success('Rendez-vous ajouté avec succès');
-        this.calendarService.addEvent(rdv);
-        this.router.navigate(['/viewOppointments']);
-      },
-      error: (error) => {
-        this.toastr.error(
-          "Erreur lors de l'ajout du rendez-vous ou du patient",
-          error
-        );
-      },
+  addPatientIdToAppointment(rdv: Appointment, patient: Patient): Observable<Appointment> {
+    return new Observable<Appointment>(observer => {
+      this.http.post<any>(this.apiLinkPatient, patient).subscribe({
+        next: (response: any) => {
+          rdv.patientId = response.id;
+          observer.next(rdv);
+          observer.complete();
+        },
+        error: error => {
+          observer.error(error);
+        }
+      });
     });
   }
+  
+
+  addAppointment(rdv: Appointment) {
+    this.http.post(this.apiLinkAppointment, rdv).subscribe({
+      next: () => {
+              this.toastr.success('Rendez-vous ajouté avec succès');
+              this.calendarService.addEvent(rdv,rdv.userId)
+              this.router.navigate(['/viewOppointments']);
+            },
+            error: (error) => {
+              this.toastr.error(
+                "Erreur lors de l'ajout du rendez-vous ou du patient",
+                error
+              );
+            },
+    })
+  }
+
+  updateAppointment(id : number){
+    
+  }
+  
 }

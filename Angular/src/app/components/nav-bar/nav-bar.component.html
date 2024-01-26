@@ -16,13 +16,16 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto topnav">
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['home']" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" *ngIf="!isLoggedIn" [routerLink]="['home']" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" *ngIf="isLoggedIn" [routerLink]="['signedInHome']" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['viewOppointments']" routerLinkActive="active"   [ngClass]="{'disabled-link': !isLoggedIn}">View doctor's schedule</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" [routerLink]="['schedule']" routerLinkActive="active"  [ngClass]="{'disabled-link': !isLoggedIn}">Schedule an oppointment</a>
+                    <a class="nav-link" [routerLink]="['schedule']" routerLinkActive="active"  [ngClass]="{'disabled-link': !isLoggedIn}">Schedule an Appointment</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['viewProfile']" *ngIf="isLoggedIn" routerLinkActive="active"  >View Profile</a>

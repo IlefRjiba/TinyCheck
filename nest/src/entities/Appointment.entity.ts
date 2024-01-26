@@ -13,6 +13,12 @@ export class Appointment {
   @Column()
   time: string;
 
+  @Column()
+  userId : number;
+
+  @Column()
+  patientId : number;
+
   @ManyToOne(() => Patient, (patient) => patient.appointments)
   patient: Patient;
   @ManyToOne(() => User, (user) => user.appointments)
