@@ -7,6 +7,8 @@ import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from "../enums/role.enum";
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 @Injectable()
 export class UserService {
   constructor(
@@ -19,8 +21,9 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async updateUser(userId: number, dto: UpdateUserDto) {
-    await this.userRepository.update(userId, { ...dto, role: dto.role as Role });
+  async updateUser(userId: number, dto: UpdateUserDto): Promise<User> {
+    await this.userRepository.update(userId, { ...dto });
+    return (this.getUserById(userId));
   }
 
   async getUserById(userId: number): Promise<User> {

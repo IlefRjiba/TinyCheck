@@ -3,7 +3,6 @@
 import { Controller, Get, Post, Body, Param, UseGuards, Put, ParseIntPipe } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-
 import { User } from '../entities/user.entity';
 import { AuthGuard } from "../auth/auth-jwt.guard";
 import { Roles } from "../auth/auth-role.decorator";

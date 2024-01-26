@@ -20,7 +20,7 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form class="form"  #formulaire="ngForm">
+                    <form class="form"  #formulaire="ngForm" *ngIf="user">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Username </label>

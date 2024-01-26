@@ -11,7 +11,7 @@ import { switchMap } from 'rxjs';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  user!: User ;
+  user!: User;
 
   constructor(
     private userService: UserService,
@@ -24,6 +24,7 @@ export class EditProfileComponent implements OnInit {
       // Fetch the user information using the current user ID
       this.userService.getUserById(currentUserId).subscribe(
         (user: User) => {
+          console.log('User information:', user);
           this.user = user;
         },
         error => {
@@ -36,7 +37,7 @@ export class EditProfileComponent implements OnInit {
 
   updateUser(form: NgForm) {
     const currentUserId = this.userService.getCurrentUserId();
-    if (currentUserId&& form.valid) {
+    if (currentUserId && form.valid) {
       this.userService.updateUser(currentUserId, form.value).subscribe(
         updatedUser => {
           this.user = updatedUser;

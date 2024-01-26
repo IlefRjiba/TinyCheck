@@ -1,22 +1,11 @@
 /* eslint-disable prettier/prettier */
 // update-user.dto.ts
+import { PartialType } from "@nestjs/swagger";
 import {IsEmail, IsOptional, IsString} from "class-validator";
+import { CreateUserDto } from "./create-user.dto";
 
 
-export class UpdateUserDto {
-
-   
+export class UpdateUserDto extends PartialType(CreateUserDto) {
     
-    
-    @IsOptional()
-    @IsEmail({}, {message: 'email must be an email (user@gmail.com)'})
-    email: string;
-
-    @IsOptional()
-    @IsString( {message: 'must be a string'})
-    username: string;
-    
-    @IsOptional()
-    @IsString()
-    role: string;
+    readonly updatedAt: Date;
 }
