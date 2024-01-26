@@ -46,7 +46,7 @@ export class AppointmentsService {
     this.http.post(this.apiLinkAppointment, rdv).subscribe({
       next: () => {
               this.toastr.success('Rendez-vous ajouté avec succès');
-              this.calendarService.addEvent(rdv)
+              this.calendarService.addEvent(rdv,rdv.userId)
               this.router.navigate(['/viewOppointments']);
             },
             error: (error) => {

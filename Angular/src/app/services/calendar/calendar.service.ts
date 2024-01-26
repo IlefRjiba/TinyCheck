@@ -26,7 +26,7 @@ export class CalendarService {
 
   events: CalendarEvent[] = [];
 
-  addEvent(appointment: Appointment): void {
+  addEvent(appointment: Appointment, currentUserId : number): void {
     
     const newEventStart = this.returnDate(appointment.date, appointment.time);
     const eventExists = this.events.some(event => event.start.getTime() === newEventStart.getTime());
@@ -34,9 +34,9 @@ export class CalendarService {
     if (!eventExists){
     let newEvent = this.events;
     newEvent.push({
-      title: 'Schedule reserved for another appointment',
+      title: this.initializeTitle(appointment,currentUserId),
       start: this.returnDate(appointment.date, appointment.time),
-      color: this.colors.colors['red'],
+      color: this.initializeColor(appointment,currentUserId),
       draggable: true,
       resizable: {
         beforeStart: true,
@@ -44,10 +44,17 @@ export class CalendarService {
       },
     });
     this.events = newEvent
+  } 
   }
-    // console.log('events------------------------------------');
-    // console.log(newEvent);
-    
+
+  initializeTitle(appointment:Appointment,currentUserId:number){
+    if (appointment.userId === currentUserId) return 'My appointment';
+    else return 'Schedule reserved for another appointment';
+  }
+
+  initializeColor(appointment:Appointment,currentUserId:number){
+    if (appointment.userId === currentUserId) return this.colors.colors['green'];
+    else return this.colors.colors['red'];
   }
 
   initializeHour(): string {

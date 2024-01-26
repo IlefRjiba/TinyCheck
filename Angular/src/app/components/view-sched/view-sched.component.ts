@@ -18,6 +18,8 @@ import { ColorsService } from 'src/app/services/colors/colors.service';
 import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from 'src/app/services/user/user.service';
+import { User } from 'src/app/entities/users.entity';
 
 @Component({
   selector: 'app-view-sched',
@@ -28,7 +30,8 @@ export class ViewSchedComponent implements OnInit {
     private calendarService: CalendarService,
     private appointmentService: AppointmentsService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private userService: UserService
   ) {
   }
 
@@ -38,10 +41,22 @@ export class ViewSchedComponent implements OnInit {
   appointments: Appointment[] = [];
   events: CalendarEvent[] = [];
 
+  currentUserId!: number;
+
   ngOnInit(): void {
-    this.loadAppointments();
     this.events = this.calendarService.events;
-    console.log('events------------------------------------',this.events);
+    const currentUserId = this.userService.getCurrentUserId();
+    if (currentUserId !== null && currentUserId !== 0) {
+      this.userService.getUserById(currentUserId).subscribe({
+        next : (user: User) => {
+          this.currentUserId = currentUserId
+        },
+        error : (error) => {
+          console.error('Error fetching user information:', error);
+        }
+    });
+    }
+    this.loadAppointments();
   }
 
   changeDay(date: Date) {
@@ -53,8 +68,6 @@ export class ViewSchedComponent implements OnInit {
   hourSelected(arg0: Date) {
     this.calendarService.chosenDate = arg0;
     this.calendarService.chosenDateByUser = true;
-    console.log('hourselected-----------------------');
-    console.log(this.calendarService.chosenDate);
     this.calendarService.updateTime();
     this.router.navigate(['/schedule']);
   }
@@ -66,10 +79,9 @@ export class ViewSchedComponent implements OnInit {
   loadAppointments(): void {
     this.appointmentService.getAppointments().subscribe({
       next: (data) => {
-        
         this.appointments = data;
         this.appointments.forEach(appointment => {
-          this.calendarService.addEvent(appointment);
+          this.calendarService.addEvent(appointment,this.currentUserId);
         });
       },
       error: (err) => {

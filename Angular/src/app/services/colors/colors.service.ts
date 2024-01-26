@@ -20,9 +20,9 @@ export class ColorsService {
       primary: '#e3bc08',
       secondary: '#FDF1BA',
     },
-    grey : {
-      primary : '#99a2b0',
-      secondary : '#8a8d96'
-    }
+    green: {
+      primary: '#75e087',
+      secondary: '#75e087',
+    },
 }
 }
