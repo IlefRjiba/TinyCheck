@@ -64,16 +64,9 @@
               </div>
             </div>
             <hr />
-            <div class="row">
-              <div class="col-sm-3">
-                <h6 class="mb-0">CIN</h6>
-              </div>
-              <div class="col-sm-9 text-secondary">
-                {{ user.cin }}
-              </div>
-            </div>
+            
 
-            <hr />
+           
             <div class="row">
               <div class="col-sm-12">
                 <span class="buttons">
@@ -98,11 +91,11 @@
           <a href="#" class="my-1">
             <div class="d-flex align-items-start" id="tooltips-container">
               <div class="list-group">
-                <div *ngFor="let appointment of user.appointments" class="my-1">
+                <div *ngFor="let appointment of appointments" class="my-1">
                   <div class="d-flex align-items-start" id="tooltips-container">
                     <div class="w-100 ms-2">
                       <h5 class="mb-1 mt-0">
-                        Appointment with {{ appointment.patient.name }}
+                        Appointment with {{ appointment.patientId }}
                       </h5>
                       <ul class="list-inline text-muted font-12">
                         <li class="list-inline-item">

@@ -62,4 +62,7 @@ export class AppointmentsService {
     
   }
   
+  deleteAppointment(id : number){
+    
+  }
 }
