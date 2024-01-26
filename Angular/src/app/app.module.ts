@@ -27,6 +27,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 
 import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
+import { UpdateAppointmentComponent } from './components/update-appointment/update-appointment.component';
 
 
 
@@ -43,6 +44,7 @@ import { SignedInHomeComponent } from './components/signed-in-home/signed-in-hom
     ProfileComponent,
     EditProfileComponent,
     SignedInHomeComponent,
+    UpdateAppointmentComponent,
 
 
   ],

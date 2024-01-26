@@ -57,5 +57,9 @@ export class AppointmentsService {
             },
     })
   }
+
+  updateAppointment(id : number){
+    
+  }
   
 }

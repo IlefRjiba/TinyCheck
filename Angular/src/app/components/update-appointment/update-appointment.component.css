@@ -1,0 +1,77 @@
+
+.backgroundImage{
+    background-image: url("/assets/images/schedule.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 130%;
+    width: 100%;
+    position: relative;
+}
+
+.form-container {
+    width: 40%;
+    padding: 20px;
+    text-align: center;
+}
+
+.appointment-form {
+    margin-left: 10%;
+    margin-top: 4%;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-header {
+    color: #e43f5d;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    color: #752818;
+    margin-bottom: 5px;
+}
+
+.input-group input[type="text"],
+.input-group input[type="date"],
+.input-group input[type="number"],
+textarea,
+.input-group input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #68ebdb;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #9edecc;
+}
+
+textarea.ng-valid.ng-touched {
+    border: 2px solid #2ecc71 !important;
+  }
+
+input.ng-valid {
+    border: 2px solid #2ecc71 !important;
+  }
+  
+  /* Champ invalide */
+  input.ng-invalid.ng-touched {
+    color: white !important;
+    border: 2px solid #e74c3c !important;
+    background-color: #ffaab9;
+  }
