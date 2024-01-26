@@ -46,4 +46,3 @@ export class UserController {
     return await this.userService.getAllUsers();
   }
 }
-

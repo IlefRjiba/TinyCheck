@@ -19,7 +19,7 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async updateUser(userId, dto: UpdateUserDto) {
+  async updateUser(userId: number, dto: UpdateUserDto) {
     await this.userRepository.update(userId, { ...dto, role: dto.role as Role });
   }
 
@@ -48,4 +48,3 @@ export class UserService {
     return this.userRepository.findOne({ where: { email } });
   }
 }
-
