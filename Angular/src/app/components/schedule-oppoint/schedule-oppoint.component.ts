@@ -31,6 +31,8 @@ export class ScheduleOppointComponent {
   patient!: Patient;
   user!: User;
 
+  currentUserId ! : number ;
+
   NameOfParent: string = '';
   SurnameOfParent: string = '';
   NameOfBaby: string = '';
@@ -54,8 +56,15 @@ export class ScheduleOppointComponent {
         this.WeightOfBaby,
         this.ReasonOfAppointment
       );
-      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user);
-      this.appointmentServie.addAppointment(this.rdv, this.patient);
+      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user, this.currentUserId,1);
+      console.log(this.rdv)
+      this.appointmentServie.addPatientIdToAppointment(this.rdv, this.patient).subscribe({
+        next: (updatedRdv) => {
+          this.appointmentServie.addAppointment(updatedRdv);
+        },
+        error: (error) => {
+          this.toastr.error('Erreur lors de l\'ajout du patient');
+      }})
     } else {
       this.toastr.error('Veuillez remplir tous les champs correctement');
     }
@@ -78,7 +87,8 @@ export class ScheduleOppointComponent {
       // Fetch the user information using the current user ID
       this.userService.getUserById(currentUserId).subscribe(
         (user: User) => {
-          this.user = user;
+          this.user = user
+          this.currentUserId = currentUserId
         },
         error => {
           console.error('Error fetching user information:', error);
