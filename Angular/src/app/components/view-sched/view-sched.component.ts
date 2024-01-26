@@ -73,7 +73,7 @@ export class ViewSchedComponent implements OnInit {
   }
 
   eventClicked(arg0: CalendarEvent<any>) {
-    this.toastr.error('This schedule is reserved for another appointment');
+    this.toastr.error('This schedule is reserved');
   }
 
   loadAppointments(): void {

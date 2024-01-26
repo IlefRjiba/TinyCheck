@@ -26,34 +26,36 @@ export class CalendarService {
 
   events: CalendarEvent[] = [];
 
-  addEvent(appointment: Appointment, currentUserId : number): void {
-    
+  addEvent(appointment: Appointment, currentUserId: number): void {
     const newEventStart = this.returnDate(appointment.date, appointment.time);
-    const eventExists = this.events.some(event => event.start.getTime() === newEventStart.getTime());
+    const eventExists = this.events.some(
+      (event) => event.start.getTime() === newEventStart.getTime()
+    );
 
-    if (!eventExists){
-    let newEvent = this.events;
-    newEvent.push({
-      title: this.initializeTitle(appointment,currentUserId),
-      start: this.returnDate(appointment.date, appointment.time),
-      color: this.initializeColor(appointment,currentUserId),
-      draggable: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-    });
-    this.events = newEvent
-  } 
+    if (!eventExists) {
+      let newEvent = this.events;
+      newEvent.push({
+        title: this.initializeTitle(appointment, currentUserId),
+        start: this.returnDate(appointment.date, appointment.time),
+        color: this.initializeColor(appointment, currentUserId),
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
+      });
+      this.events = newEvent;
+    }
   }
 
-  initializeTitle(appointment:Appointment,currentUserId:number){
+  initializeTitle(appointment: Appointment, currentUserId: number) {
     if (appointment.userId === currentUserId) return 'My appointment';
     else return 'Schedule reserved for another appointment';
   }
 
-  initializeColor(appointment:Appointment,currentUserId:number){
-    if (appointment.userId === currentUserId) return this.colors.colors['green'];
+  initializeColor(appointment: Appointment, currentUserId: number) {
+    if (appointment.userId === currentUserId)
+      return this.colors.colors['green'];
     else return this.colors.colors['red'];
   }
 
@@ -75,8 +77,6 @@ export class CalendarService {
   }
 
   updateTime() {
-    console.log('update time -------------------------');
-
     console.log(this.chosenDate);
     this.hours = this.chosenDate.getHours();
     this.minutes = this.chosenDate.getMinutes();
