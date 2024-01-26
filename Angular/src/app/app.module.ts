@@ -25,7 +25,6 @@ import { CalendarHeaderComponent } from './components/calendar-header/calendar-h
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './components/profile/profile.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { NavBarConnectedComponent } from './components/nav-bar-connected/nav-bar-connected.component';
 
 import { SignedInHomeComponent } from './components/signed-in-home/signed-in-home.component';
 
@@ -44,7 +43,6 @@ import { SignedInHomeComponent } from './components/signed-in-home/signed-in-hom
     ProfileComponent,
     EditProfileComponent,
     SignedInHomeComponent,
-    NavBarConnectedComponent,
 
 
   ],
