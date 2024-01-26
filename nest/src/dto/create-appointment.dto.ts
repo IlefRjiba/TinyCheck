@@ -9,4 +9,10 @@ export class CreateAppointmentDto {
   @IsString()
   @IsNotEmpty()
   readonly time: string; // Format HH:MM par exemple
+
+  @IsNotEmpty()
+  readonly userId: number;
+
+  @IsNotEmpty()
+  readonly patientId: number;
 }

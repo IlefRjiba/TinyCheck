@@ -1,16 +1,19 @@
 /* eslint-disable prettier/prettier */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { Appointment } from '../entities/Appointment.entity';
 import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
+import { CreatePatientDto } from 'src/dto/create-patient.dto';
+import { Patient } from 'src/entities/patient.entity';
 
 @Injectable()
 export class AppointmentsService {
   constructor(
     @InjectRepository(Appointment)
     private readonly appointmentRepository: Repository<Appointment>,
+    private connection: Connection
   ) {}
 
   create(createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
@@ -39,4 +42,5 @@ export class AppointmentsService {
     await this.findOne(id);
     await this.appointmentRepository.delete(id);
   }
+
 }

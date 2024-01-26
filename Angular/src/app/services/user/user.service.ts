@@ -16,8 +16,7 @@ const API_LINK = 'http://localhost:3000';
 export class UserService {
   private authStatusListener = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
   setAuthStatus(isAuth: boolean) {
     this.authStatusListener.next(isAuth);
   }
@@ -46,16 +45,14 @@ export class UserService {
     );
   }
 
- 
-
   getUserById(userId: number): Observable<User> {
     return this.http.get<User>(`${API_LINK}/user/get-user/${userId}`);
   }
 
   signUp(user: User): Observable<User> {
     return this.http.post<User>(API_LINK + '/user/create-user', user);
-
   }
+
   getCurrentUserId(): number | null {
     const token = localStorage.getItem('token');
     if (token) {
@@ -65,18 +62,18 @@ export class UserService {
     }
     return null;
   }
+  
   signIn(email: string, password: string): Observable<any> {
-
-    return this.http.post<any>(`${API_LINK}/auth/login`, { email, password }).pipe(
-      tap(response => {
-        if (response && response.access_token) {
-          localStorage.setItem('token', response.access_token);
-          console.log(response.access_token);
-          this.authStatusListener.next(true);
-        }
-      })
-    );
+    return this.http
+      .post<any>(`${API_LINK}/auth/login`, { email, password })
+      .pipe(
+        tap((response) => {
+          if (response && response.access_token) {
+            localStorage.setItem('token', response.access_token);
+            console.log(response.access_token);
+            this.authStatusListener.next(true);
+          }
+        })
+      );
   }
-  }
-
-
+}
