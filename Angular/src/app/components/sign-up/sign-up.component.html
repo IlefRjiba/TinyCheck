@@ -1,31 +1,33 @@
-<!-- sign-up.component.html -->
 <div class="backgroundImage">
   <div>
     <h1>hey</h1>
     <div class="card">
       <h2 class="card-header">Sign Up</h2>
-      <form class="form" (ngSubmit)="onSignUp(formulaire)" #formulaire="ngForm">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
         <div class="form-group">
-          <label for="name">Username</label>
-          <input type="text" class="form-control" id="name" placeholder="Enter your name" [(ngModel)]="user.username" name="username" required>
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" formControlName="username" placeholder="Enter your name" required>
         </div>
         <div class="form-group">
           <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="Enter your email" [(ngModel)]="user.email" name="email" required>
+          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter your email" required>
         </div>
         <div class="form-group">
-          <label for="number">Phone Number</label>
-          <input type="number" class="form-control" id="number" placeholder="Enter your phone number" [(ngModel)]="user.phone" name="phone" required>
+          <label for="phone">Phone Number</label>
+          <input type="tel" class="form-control" id="phone" formControlName="phone" placeholder="Enter your phone number" required>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" placeholder="Enter your password" [(ngModel)]="user.password" name="password" required>
+          <input type="password" class="form-control" id="password" formControlName="password" placeholder="Enter your password" required>
         </div>
         <div class="form-group">
-          <label for="passwordconfirm">Confirm your password</label>
-          <input type="password" class="form-control" id="passwordconfirm" placeholder="Confirm your password" [(ngModel)]="user.passwordConfirm" name="passwordConfirm" required>
+          <label for="passwordConfirm">Confirm your password</label>
+          <input type="password" class="form-control" id="passwordConfirm" formControlName="passwordConfirm" placeholder="Confirm your password" required>
+          <div *ngIf="signUpForm.errors?.['mismatch'] && signUpForm.get('passwordConfirm')?.touched" class="alert alert-danger">
+            Passwords do not match.
+          </div>
         </div>
-        <button type="submit" [disabled]="formulaire.invalid" class="btn submit-button">Envoyer</button>
+        <button type="submit" [disabled]="signUpForm.invalid || signUpForm.errors?.['mismatch']" class="btn submit-button">Envoyer</button>
       </form>
     </div>
   </div>
