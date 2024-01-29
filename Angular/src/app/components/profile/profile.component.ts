@@ -5,12 +5,12 @@ import { User } from '../../entities/users.entity';
 import { Router } from '@angular/router';
 import { Appointment } from '../../entities/appointment.entity';
 import { CalendarService } from '../../services/calendar/calendar.service';
-
-
+import { PatientService } from '../../services/patient/patient.service';
+import { Patient } from '../../entities/patient.entites';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent implements OnInit {
   user!: User;
@@ -18,12 +18,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private calendarService: CalendarService,
-    private userService: UserService, 
+    private userService: UserService,
     private router: Router,
     private appointmentService: AppointmentsService,
-  ) {
-  }
+    private patientService: PatientService
+  ) {}
   appointments: Appointment[] = [];
+  patients: { [key: number]: Patient } = {};
 
   ngOnInit(): void {
     const currentUserId = this.userService.getCurrentUserId() ?? 0;
@@ -32,28 +33,50 @@ export class ProfileComponent implements OnInit {
       this.userService.getUserById(currentUserId).subscribe(
         (user: User) => {
           this.user = user;
-          this.currentUserId = currentUserId
-          
+          this.currentUserId = currentUserId;
         },
-        error => {
+        (error) => {
           console.error('Error fetching user information:', error);
         }
       );
     }
-    
+    this.loadAppointments(currentUserId);
   }
 
   editprofile() {
     this.router.navigate(['/editProfile']);
-      }
-  
-  loadAppointments(): void {
-        this.appointmentService.getAppointments().subscribe({
-          next: (data) => {
-          },
-          error: (err) => {
-            console.error('Error fetching appointments:', err);
-          }
-        });}
+  }
+
+  loadAppointments(currentUserId: number): void {
+    if (currentUserId) {  
+    this.appointmentService.getAppointmentsByUserId(currentUserId).subscribe({
+        next: (data) => {
+          this.appointments = data;
+          this.appointments.forEach((appointment) => {
+            this.loadPatient(appointment.patientId);
+          });
+        },
+        error: (err) => {
+          console.error('Error fetching appointments:', err);
+        },
+      });
+    } else {
+      // Handle the error or return an empty observable
+      console.error('User ID is undefined');
+  }
+}
+  loadPatient(patientId: number) {
+    this.patientService.getPatientById(patientId).subscribe(patient => {
+      this.patients[patientId] = patient; // Store the patient details
+    });
     
+  }
+  editAppointment(appointment: Appointment): void {
+    console.log("edit appointment")
+  }
+
+  deleteAppointment(appointment: Appointment): void {
+    console.log("delete appointment")
+  }
+
 }

@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endOfDay, startOfDay } from 'date-fns';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, forkJoin } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
 import { CalendarService } from '../calendar/calendar.service';
@@ -56,6 +56,16 @@ export class AppointmentsService {
               );
             },
     })
+  }
+
+  getAppointmentsByUserId(userId: number): Observable<Appointment[]> {
+    if (userId) {
+      return this.http.get<Appointment[]>(`${this.apiLinkAppointment}/user/${userId}`);
+    } else {
+      // Handle the error or return an empty observable
+      console.error('User ID is undefined');
+      return of([]); // Returns an observable of an empty array
+    }
   }
 
   updateAppointment(id : number){

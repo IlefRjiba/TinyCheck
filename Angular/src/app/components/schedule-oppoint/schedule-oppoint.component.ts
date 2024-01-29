@@ -57,7 +57,7 @@ export class ScheduleOppointComponent {
         this.ReasonOfAppointment
       );
       this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user, this.currentUserId,1);
-      console.log(this.rdv)
+      console.log(this.patient)
       this.appointmentServie.addPatientIdToAppointment(this.rdv, this.patient).subscribe({
         next: (updatedRdv) => {
           this.appointmentServie.addAppointment(updatedRdv);
