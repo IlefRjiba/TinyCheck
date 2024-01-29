@@ -19,7 +19,7 @@ const APP_ROUTING : Routes = [
     { path: 'viewOppointments', component: ViewSchedComponent },
     { path: 'viewProfile', component:ProfileComponent },
     { path: 'editProfile', component:EditProfileComponent},
-    { path: 'updateAppointment/:id', component:UpdateAppointmentComponent},
+    { path: 'updateAppointment', component:UpdateAppointmentComponent},
     
 ]
 

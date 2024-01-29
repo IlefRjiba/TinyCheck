@@ -37,14 +37,20 @@ export class EditProfileComponent implements OnInit {
 
   updateUser(form: NgForm) {
     const currentUserId = this.userService.getCurrentUserId();
+    console.log('Component initialized')
+    console.log('Form data:', form.value);
+    console.log('Form valid:', form.valid);
+    console.log('Current User ID:', currentUserId);
+
     if (currentUserId && form.valid) {
       this.userService.updateUser(currentUserId, form.value).subscribe(
         updatedUser => {
+          console.log('Updated user:', updatedUser);
           this.user = updatedUser;
           this.router.navigate(['/viewProfile']);
         },
         error => console.error('Error updating user:', error)
       );
     }
-  }
-}
+  
+  }}

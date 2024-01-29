@@ -18,6 +18,5 @@ export class CreateUserDto {
   @IsNotEmpty()
   phone: number;
 
-  readonly createdAt: Date;
-  
+ 
 }

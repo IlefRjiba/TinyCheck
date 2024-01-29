@@ -10,6 +10,7 @@ import { Patient } from 'src/entities/patient.entity';
 
 @Injectable()
 export class AppointmentsService {
+  
   constructor(
     @InjectRepository(Appointment)
     private readonly appointmentRepository: Repository<Appointment>,
@@ -44,6 +45,15 @@ export class AppointmentsService {
   async remove(id: number): Promise<void> {
     await this.findOne(id);
     await this.appointmentRepository.delete(id);
+  }
+
+  async findAllByUserId(id: number): Promise<Appointment[]> {
+    return this.appointmentRepository.find({
+      where: {
+        userId: id,
+      },
+      
+    });
   }
 
 }

@@ -9,9 +9,10 @@
       <div class="input-group">
         <label for="parentName">Parent's Name</label>
         <input
+          required
           type="text"
           id="parentName"
-          [(ngModel)]="patient.name"
+          [(ngModel)]="NameOfParent"
           placeholder="Parent's Name"
           ngModel
           name="parentName"
@@ -21,13 +22,14 @@
       <div class="input-group">
         <label for="parentSurname">Parent's Surname</label>
         <input
+          required
           type="text"
           id="parentSurname"
           placeholder="Parent's Surname"
           ngModel
           name="parentSurname"
           #ParentSurname="ngModel"
-          [(ngModel)]="patient.lastname"
+          [(ngModel)]="SurnameOfParent"
         />
       </div>
 
@@ -35,9 +37,10 @@
       <div class="input-group">
         <label for="BabyName">Baby's name</label>
         <input
+          required
           type="text"
           id="BabyName"
-          [(ngModel)]="patient.Babyname"
+          [(ngModel)]="NameOfBaby"
           placeholder="Baby's name"
           ngModel
           name="BabyName"
@@ -47,8 +50,9 @@
       <div class="input-group">
         <label for="BabyAge">Baby's age</label>
         <input
+          required
           type="text"
-          [(ngModel)]="patient.Babyage"
+          [(ngModel)]="AgeOfBaby"
           id="BabyAge"
           placeholder="Baby's age"
           ngModel
@@ -59,12 +63,13 @@
       <div class="input-group">
         <label for="Babyweight">Baby's weight</label>
         <input
+          required
           type="number"
           id="Babyweight"
           placeholder="Baby's weight"
           ngModel
           name="Babyweight"
-          [(ngModel)]="patient.babypoid"
+          [(ngModel)]="WeightOfBaby"
           #BabyWeight="ngModel"
         />
       </div>
@@ -76,14 +81,14 @@
           placeholder="Reason of appointment"
           ngModel
           name="reasonOfAppointment"
-          [(ngModel)]="patient.Reason"
+          [(ngModel)]="ReasonOfAppointment"
         ></textarea>
       </div>
 
-      <!-- Appointment info -->
       <div class="input-group">
         <label for="appointmentDate">Date of Appointment</label>
         <input
+          required
           type="date"
           id="appointmentDate"
           name="dateOfAppointment"
@@ -94,6 +99,7 @@
       <div class="input-group">
         <label for="appointmentTime">Hour of Appointment</label>
         <input
+          required
           type="time"
           id="appointmentTime"
           ngModel
@@ -107,7 +113,7 @@
         <button
           type="submit"
           style="background-color: #ff8fab; margin: 3px"
-          (click)="updateAppointment()"
+          (click)="updateAppointment(formulaire)"
         >
           Update
         </button>
@@ -118,7 +124,7 @@
           Return to the doctor's schedule
         </button>
         <button
-          (click)="resetForm(formulaire)"
+          (click)="resetForm()"
           style="background-color: #c10b39; margin: 3px"
         >
           Reset the form

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
 import { User } from 'src/app/entities/users.entity';
 import { ToastrService } from 'ngx-toastr';
@@ -8,36 +8,28 @@ import { AppointmentsService } from 'src/app/services/appointments/appointments.
 import { UserService } from 'src/app/services/user/user.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
+import { PatientService } from 'src/app/services/patient/patient.service';
 
 @Component({
   selector: 'app-update-appointment',
   templateUrl: './update-appointment.component.html',
-  styleUrls: ['./update-appointment.component.css']
+  styleUrls: ['./update-appointment.component.css'],
 })
 export class UpdateAppointmentComponent {
-updateAppointment() {
-throw new Error('Method not implemented.');
-}
-
-  
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
     private calendarService: CalendarService,
     private router: Router,
     private appointmentServie: AppointmentsService,
-    private userService: UserService
+    private userService: UserService,
+    private patientService: PatientService
   ) {}
-
-  viewform: boolean = true;
 
   rdv!: Appointment;
   patient!: Patient;
-  user!: User;
 
-  currentUserId ! : number ;
-
-  NameOfParent: string = '';
+  NameOfParent = '';
   SurnameOfParent: string = '';
   NameOfBaby: string = '';
   AgeOfBaby: string = '';
@@ -46,39 +38,8 @@ throw new Error('Method not implemented.');
   dateOfAppointment = this.calendarService.initializeDate();
   hourOfAppointment = this.calendarService.initializeHour();
 
-  addAppointment(formulaire: NgForm) {
-    if (formulaire.valid) {
-      const rdvDate = this.calendarService
-        .returnDate(this.dateOfAppointment, this.hourOfAppointment)
-        .toISOString();
-
-      this.patient = new Patient(
-        this.NameOfParent,
-        this.SurnameOfParent,
-        this.NameOfBaby,
-        this.AgeOfBaby,
-        this.WeightOfBaby,
-        this.ReasonOfAppointment
-      );
-      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.currentUserId,1);
-      console.log(this.rdv)
-      this.appointmentServie.addPatientIdToAppointment(this.rdv, this.patient).subscribe({
-        next: (updatedRdv) => {
-          this.appointmentServie.addAppointment(updatedRdv);
-        },
-        error: (error) => {
-          this.toastr.error('Erreur lors de l\'ajout du patient');
-      }})
-    } else {
-      this.toastr.error('Veuillez remplir tous les champs correctement');
-    }
-  }
-
-  resetForm(formulaire: NgForm) {
-    this.calendarService.resetDate();
-    this.dateOfAppointment = '';
-    this.hourOfAppointment = '';
-    formulaire.resetForm();
+  resetForm() {
+    this.initializeForm();
   }
 
   backToSchedule() {
@@ -86,19 +47,59 @@ throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {
-    const currentUserId = this.userService.getCurrentUserId();
-    if (currentUserId !== null && currentUserId !== 0) {
-      // Fetch the user information using the current user ID
-      this.userService.getUserById(currentUserId).subscribe(
-        (user: User) => {
-          this.user = user
-          this.currentUserId = currentUserId
-        },
-        error => {
-          console.error('Error fetching user information:', error);
-        }
-      );
+    this.initializeForm();
+  }
+
+  updateAppointment(formulaire: NgForm) {
+    if (formulaire.invalid){
+      this.toastr.error('Please fill all the fields correctly');
     }
-    
+    else {
+      this.readForm()
+      console.log("-----------patient------------")
+      console.log(this.patient)
+      console.log("-----------rdv------------")
+      console.log(this.rdv)
+      this.patientService.updatePatient(this.patient,this.rdv.patientId).subscribe({
+        next : () => {this.appointmentServie.updateAppointment(this.appointmentServie.updatedAppointmentId,this.rdv).subscribe({
+          next : () => this.toastr.success('Appointment updated successfully')
+        })
+      }
+      })
+    }
+  }
+
+  initializeForm() {
+    this.rdv = this.appointmentServie.updatedAppointment;
+    this.patientService.getPatientById(this.rdv.patientId).subscribe({
+      next: (patient) => {
+        this.patient = patient;
+        console.log(this.patient);
+        this.NameOfParent = patient.name;
+        this.SurnameOfParent = patient.lastname;
+        this.NameOfBaby = patient.Babyname;
+        this.AgeOfBaby = patient.Babyage;
+        this.WeightOfBaby = patient.babypoid;
+        this.ReasonOfAppointment = patient.Reason;
+        this.dateOfAppointment = new Date(this.rdv.date)
+          .toISOString()
+          .split('T')[0];
+        this.hourOfAppointment = this.rdv.time;
+      },
+      error: (error) => {
+        console.error('Error fetching patient information:', error);
+      },
+    });
+  }
+
+  readForm(){
+    this.patient.name = this.NameOfParent;
+    this.patient.lastname = this.SurnameOfParent;
+    this.patient.Babyname = this.NameOfBaby;
+    this.patient.Babyage = this.AgeOfBaby;
+    this.patient.babypoid = this.WeightOfBaby;
+    this.patient.Reason = this.ReasonOfAppointment;
+    this.rdv.date = this.dateOfAppointment;
+    this.rdv.time = this.hourOfAppointment;
   }
 }
