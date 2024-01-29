@@ -78,5 +78,8 @@ export class ProfileComponent implements OnInit {
   deleteAppointment(appointment: Appointment): void {
     console.log("delete appointment")
   }
+  logout() {
+    console.log('logged out ');
+    }
 
 }
