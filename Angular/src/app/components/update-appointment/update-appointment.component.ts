@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user/user.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
 import { PatientService } from 'src/app/services/patient/patient.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-update-appointment',
@@ -43,6 +44,7 @@ export class UpdateAppointmentComponent {
   }
 
   backToSchedule() {
+    this.toastr.info('Your changes have been discarded')
     this.router.navigate(['/viewOppointments']);
   }
 
@@ -50,22 +52,28 @@ export class UpdateAppointmentComponent {
     this.initializeForm();
   }
 
-  updateAppointment(formulaire: NgForm) {
-    if (formulaire.invalid){
+  updateAppointment(formulaire: NgForm){
+    if (formulaire.invalid) {
       this.toastr.error('Please fill all the fields correctly');
-    }
-    else {
-      this.readForm()
-      console.log("-----------patient------------")
-      console.log(this.patient)
-      console.log("-----------rdv------------")
-      console.log(this.rdv)
-      this.patientService.updatePatient(this.patient,this.rdv.patientId).subscribe({
-        next : () => {this.appointmentServie.updateAppointment(this.appointmentServie.updatedAppointmentId,this.rdv).subscribe({
-          next : () => this.toastr.success('Appointment updated successfully')
-        })
-      }
-      })
+    } else {
+      // this.calendarService.deleteAppointment(this.rdv)
+      this.readForm();
+      this.patientService
+        .updatePatient(this.patient, this.rdv.patientId)
+        .subscribe({
+          next: () => {
+            this.appointmentServie
+              .updateAppointment(
+                this.appointmentServie.updatedAppointmentId,
+                this.rdv
+              )
+              .subscribe({
+                next: () =>
+                  this.toastr.success('Appointment updated successfully'),
+              });
+          },
+        });
+      this.router.navigate(['/viewOppointments']);
     }
   }
 
@@ -92,7 +100,7 @@ export class UpdateAppointmentComponent {
     });
   }
 
-  readForm(){
+  readForm() {
     this.patient.name = this.NameOfParent;
     this.patient.lastname = this.SurnameOfParent;
     this.patient.Babyname = this.NameOfBaby;

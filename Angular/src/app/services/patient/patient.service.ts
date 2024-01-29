@@ -11,6 +11,7 @@ const API_LINK = 'http://localhost:3000';
 export class PatientService {
 
   constructor(private http: HttpClient) { }
+  
   getPatientById(patientId: number): Observable<Patient> {
     return this.http.get<Patient>(`${API_LINK }/patients/${patientId}`);
   }

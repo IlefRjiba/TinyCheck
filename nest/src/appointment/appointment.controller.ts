@@ -3,8 +3,6 @@ import { Controller, Get, Post, Body, Put, Param, Delete, ParseIntPipe } from '@
 import { AppointmentsService } from './appointment.service';
 import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
-import { CreatePatientDto } from 'src/dto/create-patient.dto';
-import { Appointment } from '../entities/Appointment.entity';
 
 @Controller('appointment')
 export class AppointmentsController {

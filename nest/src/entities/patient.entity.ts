@@ -1,5 +1,13 @@
-/* eslint-disable prettier/prettier */
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne, JoinColumn , ManyToMany,JoinTable } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 import { Appointment } from './Appointment.entity';
 import { MedicalRecord } from '../entities/medical-record.entity';
 import { User } from './user.entity';
@@ -12,14 +20,14 @@ export class Patient {
   name: string;
   @Column()
   lastname: string;
- 
+
   @Column()
   Babyname: string;
   @Column()
   Babyage: string;
   @Column()
   babypoid: number;
-  
+
   @Column()
   Reason: string;
   @OneToMany(() => Appointment, (appointment) => appointment.patient)
@@ -30,5 +38,4 @@ export class Patient {
   @ManyToMany(() => User, (user) => user.patients)
   @JoinTable()
   users: User[];
-
 }

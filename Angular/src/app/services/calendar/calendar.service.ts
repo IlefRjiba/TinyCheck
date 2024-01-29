@@ -3,6 +3,7 @@ import { CalendarEvent, CalendarEventAction } from 'angular-calendar';
 import { ColorsService } from '../colors/colors.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,9 @@ export class CalendarService {
   formattedDate: string = '';
 
   events: CalendarEvent[] = [];
+
+  private appointmentsChangedSource = new Subject<void>();
+  appointmentsChanged$ = this.appointmentsChangedSource.asObservable();
 
   addEvent(appointment: Appointment, currentUserId: number): void {
     const newEventStart = this.returnDate(appointment.date, appointment.time);
@@ -104,5 +108,16 @@ export class CalendarService {
     let [hours, minutes] = time.split(':').map(Number);
     date.setHours(hours, minutes, 0, 0);
     return date;
+  }
+
+  deleteAppointment(appointmentToDelete : Appointment){
+    const newEventStart = this.returnDate(appointmentToDelete.date, appointmentToDelete.time);
+    const eventExists = this.events.some(
+      (event) => event.start.getTime() === newEventStart.getTime()
+    );
+    if (eventExists) {
+      this.events = this.events.filter((event) => event.start.getTime() !== newEventStart.getTime());
+    }
+    console.log(this.events)
   }
 }

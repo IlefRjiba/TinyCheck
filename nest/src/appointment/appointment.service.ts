@@ -10,11 +10,9 @@ import { Patient } from 'src/entities/patient.entity';
 
 @Injectable()
 export class AppointmentsService {
-  
   constructor(
     @InjectRepository(Appointment)
-    private readonly appointmentRepository: Repository<Appointment>,
-    private connection: Connection
+    private readonly appointmentRepository: Repository<Appointment>
   ) {}
 
   create(createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
@@ -34,11 +32,14 @@ export class AppointmentsService {
     return appointment;
   }
 
-  async update(id: number, updateAppointmentDto: UpdateAppointmentDto): Promise<Appointment> {
+  async update(
+    id: number,
+    updateAppointmentDto: UpdateAppointmentDto,
+  ): Promise<Appointment> {
     const newCv = await this.appointmentRepository.preload({
       id,
       ...updateAppointmentDto,
-    })
+    });
     return this.appointmentRepository.save(newCv);
   }
 
@@ -52,8 +53,6 @@ export class AppointmentsService {
       where: {
         userId: id,
       },
-      
     });
   }
-
 }
