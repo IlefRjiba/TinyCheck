@@ -9,6 +9,7 @@ import { User } from '../../entities/users.entity';
   styleUrls: ['./signed-in-home.component.css']
 })
 export class SignedInHomeComponent {
+
   user!: User;
 
   constructor(
@@ -32,4 +33,7 @@ export class SignedInHomeComponent {
     }
     
   }
+  logout() {
+    console.log('logged out ');
+    }
 }
