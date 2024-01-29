@@ -15,6 +15,9 @@ import { Patient } from 'src/app/entities/patient.entites';
   styleUrls: ['./update-appointment.component.css']
 })
 export class UpdateAppointmentComponent {
+updateAppointment() {
+throw new Error('Method not implemented.');
+}
 
   
   constructor(
@@ -57,7 +60,7 @@ export class UpdateAppointmentComponent {
         this.WeightOfBaby,
         this.ReasonOfAppointment
       );
-      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user, this.currentUserId,1);
+      this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.currentUserId,1);
       console.log(this.rdv)
       this.appointmentServie.addPatientIdToAppointment(this.rdv, this.patient).subscribe({
         next: (updatedRdv) => {

@@ -34,8 +34,11 @@ export class AppointmentsService {
   }
 
   async update(id: number, updateAppointmentDto: UpdateAppointmentDto): Promise<Appointment> {
-    const appointment = await this.findOne(id);
-    return this.appointmentRepository.save({ ...appointment, ...updateAppointmentDto });
+    const newCv = await this.appointmentRepository.preload({
+      id,
+      ...updateAppointmentDto,
+    })
+    return this.appointmentRepository.save(newCv);
   }
 
   async remove(id: number): Promise<void> {

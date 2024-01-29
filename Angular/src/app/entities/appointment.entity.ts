@@ -9,7 +9,7 @@ export class Appointment {
     public date: string = '',
     public time: string = '',
     public patient: Patient,
-    public user: User,
+    // public user: User,
     public userId : number,
     public patientId: number
   ) {}

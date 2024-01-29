@@ -1,20 +1,7 @@
 import { Router } from '@angular/router';
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef,
-  Input,
-  OnInit,
-} from '@angular/core';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView,
-} from 'angular-calendar';
+import { Component, OnInit } from '@angular/core';
+import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { CalendarService } from '../../services/calendar/calendar.service';
-import { ColorsService } from 'src/app/services/colors/colors.service';
 import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { ToastrService } from 'ngx-toastr';
@@ -32,8 +19,7 @@ export class ViewSchedComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private userService: UserService
-  ) {
-  }
+  ) {}
 
   selectedDate?: Date;
   view: CalendarView = CalendarView.Month;
@@ -48,13 +34,13 @@ export class ViewSchedComponent implements OnInit {
     const currentUserId = this.userService.getCurrentUserId();
     if (currentUserId !== null && currentUserId !== 0) {
       this.userService.getUserById(currentUserId).subscribe({
-        next : (user: User) => {
-          this.currentUserId = currentUserId
+        next: (user: User) => {
+          this.currentUserId = currentUserId;
         },
-        error : (error) => {
+        error: (error) => {
           console.error('Error fetching user information:', error);
-        }
-    });
+        },
+      });
     }
     this.loadAppointments();
   }
@@ -80,13 +66,13 @@ export class ViewSchedComponent implements OnInit {
     this.appointmentService.getAppointments().subscribe({
       next: (data) => {
         this.appointments = data;
-        this.appointments.forEach(appointment => {
-          this.calendarService.addEvent(appointment,this.currentUserId);
+        this.appointments.forEach((appointment) => {
+          this.calendarService.addEvent(appointment, this.currentUserId);
         });
       },
       error: (err) => {
         console.error('Error fetching appointments:', err);
-      }
-    });}
-
+      },
+    });
+  }
 }
