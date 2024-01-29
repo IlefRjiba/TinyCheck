@@ -76,10 +76,11 @@ export class UserService {
         })
       );
   }
-  
+
 logout(): void {
   localStorage.removeItem('token');
   this.setAuthStatus(false);
+  
 }
 
 }
