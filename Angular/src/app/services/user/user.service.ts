@@ -62,7 +62,7 @@ export class UserService {
     }
     return null;
   }
-  
+
   signIn(email: string, password: string): Observable<any> {
     return this.http
       .post<any>(`${API_LINK}/auth/login`, { email, password })
@@ -76,4 +76,10 @@ export class UserService {
         })
       );
   }
+  
+logout(): void {
+  localStorage.removeItem('token');
+  this.setAuthStatus(false);
+}
+
 }
