@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { AppointmentsService } from './appointment.service';
 import { CreateAppointmentDto } from '../dto/create-appointment.dto';
 import { UpdateAppointmentDto } from '../dto/update-appointment.dto';
+import { CreatePatientDto } from 'src/dto/create-patient.dto';
+import { Appointment } from '../entities/Appointment.entity';
 
 @Controller('appointment')
 export class AppointmentsController {
@@ -32,4 +34,9 @@ export class AppointmentsController {
   remove(@Param('id') id: number) {
     return this.appointmentsService.remove(id);
   }
+
+  @Get('/user/:userId')
+  getAppointmentsByUserId(@Param('userId', ParseIntPipe) id: number) {
+  return this.appointmentsService.findAllByUserId(id);
+}
 }

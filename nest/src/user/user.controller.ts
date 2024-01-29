@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 // user.controller.ts
-import { Controller, Get, Post, Body, Param, UseGuards, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, UseGuards, Put, ParseIntPipe, Patch } from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from '../dto/create-user.dto';
-
 import { User } from '../entities/user.entity';
 import { AuthGuard } from "../auth/auth-jwt.guard";
 import { Roles } from "../auth/auth-role.decorator";
@@ -23,20 +22,21 @@ export class UserController {
   }
 
 
-  @Roles(Role.Admin)
-  @UseGuards(AuthGuard, RoleGuard)
+  
+  // @UseGuards(AuthGuard, RoleGuard)
   @Put('update-user/:userId')
   async updateUser(
-    @Param('userId') userId,
+    @Param('userId', ParseIntPipe) userId: number,
     @Body() updateUserDto: UpdateUserDto,
   ) {
     return await this.userService.updateUser(userId, updateUserDto);
   }
 
   @Get('get-user/:userId')
-  async getUserById(@Param('userId') userId): Promise<User> {
-    return await this.userService.getUserById(userId);
+  getUserById(@Param('userId', ParseIntPipe) userId: number): Promise<User> {
+    return this.userService.getUserById(userId);
   }
+
 
   @Roles(Role.Admin)
   // @UseGuards(AuthGuard, RoleGuard)

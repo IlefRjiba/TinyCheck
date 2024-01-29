@@ -1,12 +1,14 @@
 /* eslint-disable prettier/prettier */
 // users.service.ts
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Role } from "../enums/role.enum";
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 @Injectable()
 export class UserService {
   constructor(
@@ -19,12 +21,20 @@ export class UserService {
     return await this.userRepository.save(user);
   }
 
-  async updateUser(userId, dto: UpdateUserDto) {
-    await this.userRepository.update(userId, { ...dto, role: dto.role as Role });
+  async updateUser(userId: number, dto: UpdateUserDto): Promise<User> {
+    await this.userRepository.update(userId, { ...dto });
+    return (this.getUserById(userId));
   }
 
-  async getUserById(userId): Promise<User> {
-    return await this.userRepository.findOne(userId);
+  async getUserById(userId: number): Promise<User> {
+    const user = await this.userRepository.findOneBy({ id: userId})
+
+
+    if (!user) {
+      throw new NotFoundException(`User with ID ${userId} not found`);
+    }
+
+    return user;
   }
 
   async getUserByEmail(email): Promise<User> {
@@ -41,4 +51,3 @@ export class UserService {
     return this.userRepository.findOne({ where: { email } });
   }
 }
-

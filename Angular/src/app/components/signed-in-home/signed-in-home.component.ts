@@ -9,6 +9,7 @@ import { User } from '../../entities/users.entity';
   styleUrls: ['./signed-in-home.component.css']
 })
 export class SignedInHomeComponent {
+
   user!: User;
 
   constructor(
@@ -18,7 +19,21 @@ export class SignedInHomeComponent {
   }
 
   ngOnInit(): void {
-    // For testing, let's use the first user in the hardcoded array
-    this.user = this.userService.users[0]; // Assuming the first user is the one you want to display
+    const currentUserId = this.userService.getCurrentUserId() ?? 0;
+    if (currentUserId !== 0) {
+      // Fetch the user information using the current user ID
+      this.userService.getUserById(currentUserId).subscribe(
+        (user: User) => {
+          this.user = user;
+        },
+        error => {
+          console.error('Error fetching user information:', error);
+        }
+      );
+    }
+    
   }
+  logout() {
+    console.log('logged out ');
+    }
 }

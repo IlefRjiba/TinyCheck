@@ -20,44 +20,35 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form class="form"  #formulaire="ngForm">
+                    <form class="form" #formulaire="ngForm" (ngSubmit)="updateUser(formulaire)" *ngIf="user">
                         <!-- Form Group (username)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputUsername">Username </label>
-                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="username">
+                            <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" [(ngModel)]="user.username" name="username">
                         </div>
                         
                         
                         <!-- Form Row        -->
                         <div class="row gx-3 mb-3">
-                            <!-- Form Group (organization name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputOrgName">CIN</label>
-                                <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your CIN  number" value="12345678" >
-                            </div>
-                            <!-- Form Group (location)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLocation">Occupation</label>
-                                <input class="form-control" id="inputLocation" type="text" placeholder="Enter your Occupation" value="San Francisco, CA">
-                            </div>
+                           
                         </div>
                         <!-- Form Group (email address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="name@example.com">
+                            <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" [(ngModel)]="user.email" name="email">
                         </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputPhone">Phone number</label>
-                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number" value="99888777">
+                                <input class="form-control" id="inputPhone" type="tel" placeholder="Enter your phone number"  [(ngModel)]="user.phone" name="phone">
                             </div>
                             <!-- Form Group (birthday)-->
                             
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button" [disabled]="formulaire.invalid" (click)="updateUser(formulaire)" >Save changes</button>
+                        <button class="btn btn-primary" type="submit" [disabled]="!formulaire.valid">Save changes</button>
                     </form>
                 </div>
             </div>

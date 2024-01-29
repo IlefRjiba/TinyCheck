@@ -1,20 +1,22 @@
 import { Component } from '@angular/core';
 import { FormBuilder, NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { User } from 'src/app/entities/users.entity';
 import { ToastrService } from 'ngx-toastr';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { Router } from '@angular/router';
+import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
+import { UserService } from 'src/app/services/user/user.service';
 import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
-import { AppointmentsService } from 'src/app/services/appointments/appointments.service';
-import { CalendarService } from 'src/app/services/calendar/calendar.service';
-import { User } from '../../entities/users.entity';
-import { UserService } from '../../services/user/user.service';
 
 @Component({
-  selector: 'app-schedule-oppoint',
-  templateUrl: './schedule-oppoint.component.html',
-  styleUrls: ['./schedule-oppoint.component.css'],
+  selector: 'app-update-appointment',
+  templateUrl: './update-appointment.component.html',
+  styleUrls: ['./update-appointment.component.css']
 })
-export class ScheduleOppointComponent {
+export class UpdateAppointmentComponent {
+
+  
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService,
@@ -22,7 +24,6 @@ export class ScheduleOppointComponent {
     private router: Router,
     private appointmentServie: AppointmentsService,
     private userService: UserService
-
   ) {}
 
   viewform: boolean = true;
@@ -57,7 +58,7 @@ export class ScheduleOppointComponent {
         this.ReasonOfAppointment
       );
       this.rdv = new Appointment(rdvDate.toString(), this.hourOfAppointment,this.patient,this.user, this.currentUserId,1);
-      console.log(this.patient)
+      console.log(this.rdv)
       this.appointmentServie.addPatientIdToAppointment(this.rdv, this.patient).subscribe({
         next: (updatedRdv) => {
           this.appointmentServie.addAppointment(updatedRdv);
@@ -97,5 +98,4 @@ export class ScheduleOppointComponent {
     }
     
   }
-
 }
