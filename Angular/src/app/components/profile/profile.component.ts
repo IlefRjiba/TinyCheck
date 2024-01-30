@@ -61,23 +61,26 @@ export class ProfileComponent implements OnInit {
         },
       });
     } else {
-      // Handle the error or return an empty observable
       console.error('User ID is undefined');
     }
   }
   loadPatient(patientId: number) {
     this.patientService.getPatientById(patientId).subscribe((patient) => {
-      this.patients[patientId] = patient; // Store the patient details
+      this.patients[patientId] = patient;
     });
   }
   editAppointment(appointment: any): void {
     this.appointmentService.updatedAppointment = appointment;
-    this.appointmentService.updatedAppointmentId = appointment.id
-    // console.log(appointment.id)
+    this.appointmentService.updatedAppointmentId = appointment.id;
+    console.log(appointment.date)
     this.router.navigate(['/updateAppointment']);
   }
 
   deleteAppointment(appointment: Appointment): void {
     console.log('delete appointment');
+  }
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/home']);
   }
 }

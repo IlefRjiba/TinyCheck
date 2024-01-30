@@ -10,6 +10,7 @@ import { Appointment } from 'src/app/entities/appointment.entity';
 import { Patient } from 'src/app/entities/patient.entites';
 import { PatientService } from 'src/app/services/patient/patient.service';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-update-appointment',
@@ -44,7 +45,7 @@ export class UpdateAppointmentComponent {
   }
 
   backToSchedule() {
-    this.toastr.info('Your changes have been discarded')
+    this.toastr.info('Your changes have been discarded');
     this.router.navigate(['/viewOppointments']);
   }
 
@@ -52,7 +53,7 @@ export class UpdateAppointmentComponent {
     this.initializeForm();
   }
 
-  updateAppointment(formulaire: NgForm){
+  updateAppointment(formulaire: NgForm) {
     if (formulaire.invalid) {
       this.toastr.error('Please fill all the fields correctly');
     } else {
@@ -89,10 +90,9 @@ export class UpdateAppointmentComponent {
         this.AgeOfBaby = patient.Babyage;
         this.WeightOfBaby = patient.babypoid;
         this.ReasonOfAppointment = patient.Reason;
-        this.dateOfAppointment = new Date(this.rdv.date)
-          .toISOString()
-          .split('T')[0];
         this.hourOfAppointment = this.rdv.time;
+        const d = this.calendarService.returnDate(this.rdv.date, this.rdv.time);
+        console.log(d)
       },
       error: (error) => {
         console.error('Error fetching patient information:', error);

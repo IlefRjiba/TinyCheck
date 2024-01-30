@@ -133,3 +133,25 @@
     .text-pink {
         color: rgb(234, 119, 173) !important;
     }
+    .logout-button-container {
+        display: flex;
+        justify-content: center; /* Center the button horizontally */
+        margin-top: 20px; /* Add some margin at the top */
+        padding-bottom: 20px; /* Add some padding at the bottom */
+      }
+      
+      .logout-button {
+        padding: 10px 20px; /* Add padding inside the button */
+        font-size: 1rem; /* Set font size */
+        color: #fff; /* Set text color */
+        background-color:  #fa6187; /* Set background color */
+        border: none; /* Remove border */
+        border-radius: 5px; /* Add border radius for rounded corners */
+        cursor: pointer; /* Change mouse cursor on hover */
+        transition: background-color 0.3s ease; /* Transition for background color change */
+      }
+      
+      .logout-button:hover {
+        background-color:  rgb(234, 119, 173); /* Change background color on hover */
+      }
+    

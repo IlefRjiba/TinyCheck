@@ -1,55 +1,54 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl,Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UserService } from '../../services/user/user.service';
 import { Router } from '@angular/router';
-import { NgModel } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css'],
+  styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent {
-  user = {
-    username: '',
-    email: '',
-    phone: '',
-    password: '',
-    passwordConfirm: '',
-  };
+  signUpForm: FormGroup;
+
   constructor(
-    private UserService: UserService,
+    private userService: UserService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.signUpForm = new FormGroup({
+      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      phone: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      passwordConfirm: new FormControl('', Validators.required)
+    }, this.passwordMatchValidator);
+  }
 
-  onSignUp(form: NgForm) {
-    console.log(form.value);
-    if (form.invalid) {
-      this.toastr.error('Please fill in all fields correctly.');
+  passwordMatchValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    const formGroup = control as FormGroup;
+    const password = formGroup.get('password')?.value;
+    const passwordConfirm = formGroup.get('passwordConfirm')?.value;
+    return password === passwordConfirm ? null : { mismatch: true };
+  };
+
+
+
+  onSignUp() {
+    if (this.signUpForm.invalid || this.signUpForm.hasError('mismatch')) {
+      this.toastr.error('Please fill in all fields correctly and ensure passwords match.');
       return;
     }
 
-
- 
-
-    this.UserService.signUp(form.value).subscribe({
+    this.userService.signUp(this.signUpForm.value).subscribe({
       next: (response) => {
-        console.log('User signed up', response);
-        this.router.navigate(['/signIn']);
         this.toastr.success('Welcome, please sign in');
-        // Vous pouvez ici rediriger l'utilisateur ou afficher un message de succès
+        this.router.navigate(['/signIn']);
       },
       error: (error) => {
-        console.error('Sign up failed', error);
-        console.log(form.value);
-
-        // Vous pouvez vérifier le message d'erreur spécifique ici si votre API le renvoie
-        // par exemple: if (error.error.message.includes('email already exists'))
         this.toastr.error('This email is already in use.');
-      },
+      }
     });
-
   }
 }

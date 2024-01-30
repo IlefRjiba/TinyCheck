@@ -9,6 +9,7 @@ import { User } from '../../entities/users.entity';
   styleUrls: ['./signed-in-home.component.css']
 })
 export class SignedInHomeComponent {
+
   user!: User;
 
   constructor(
@@ -30,6 +31,11 @@ export class SignedInHomeComponent {
         }
       );
     }
-    
+
   }
+  logout() {
+    this.userService.logout();
+    this.router.navigate(['/home']);
+    // Redirigez vers la page de connexion ou toute autre page appropriée
+}
 }

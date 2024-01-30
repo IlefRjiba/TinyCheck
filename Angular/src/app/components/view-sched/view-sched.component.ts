@@ -30,6 +30,8 @@ export class ViewSchedComponent implements OnInit {
   currentUserId!: number;
 
   ngOnInit(): void {
+    this.calendarService.events = []
+    // this.loadAppointments();
     this.events = this.calendarService.events;
     const currentUserId = this.userService.getCurrentUserId();
     if (currentUserId !== null && currentUserId !== 0) {
@@ -63,6 +65,7 @@ export class ViewSchedComponent implements OnInit {
   }
 
   loadAppointments(): void {
+    this.appointments=[];
     this.appointmentService.getAppointments().subscribe({
       next: (data) => {
         this.appointments = data;

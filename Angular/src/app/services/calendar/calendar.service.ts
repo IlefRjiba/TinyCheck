@@ -69,9 +69,9 @@ export class CalendarService {
   }
 
   initializeDate() {
-    let day = this.chosenDate.getDate(); // Returns the day of the month (1-31)
-    let month = this.chosenDate.getMonth() + 1; // Returns the month (0-11), so we add 1
-    let year = this.chosenDate.getFullYear(); // Returns the year (four digits)
+    let day = this.chosenDate.getDate();
+    let month = this.chosenDate.getMonth() + 1;
+    let year = this.chosenDate.getFullYear();
     this.formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day
       .toString()
       .padStart(2, '0')}`;
@@ -110,14 +110,19 @@ export class CalendarService {
     return date;
   }
 
-  deleteAppointment(appointmentToDelete : Appointment){
-    const newEventStart = this.returnDate(appointmentToDelete.date, appointmentToDelete.time);
+  deleteAppointment(appointmentToDelete: Appointment) {
+    const newEventStart = this.returnDate(
+      appointmentToDelete.date,
+      appointmentToDelete.time
+    );
     const eventExists = this.events.some(
       (event) => event.start.getTime() === newEventStart.getTime()
     );
     if (eventExists) {
-      this.events = this.events.filter((event) => event.start.getTime() !== newEventStart.getTime());
+      this.events = this.events.filter(
+        (event) => event.start.getTime() !== newEventStart.getTime()
+      );
     }
-    console.log(this.events)
+    console.log(this.events);
   }
 }
