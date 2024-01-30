@@ -91,7 +91,7 @@
                 <div *ngFor="let appointment of appointments" class="my-1">
                   <div class="d-flex align-items-start" id="tooltips-container" >
                     <div class="w-100 ms-2"  >
-                      <h5 class="mb-1 mt-0"  >
+                      <h5 class="mb-1 mt-0" *ngIf="patients[appointment.patientId]" >
                         Appointment with {{ patients[appointment.patientId].Babyname || 'Loading...' }}
                       </h5>
                     
