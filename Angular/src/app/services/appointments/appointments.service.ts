@@ -69,7 +69,8 @@ export class AppointmentsService {
         `${this.apiLinkAppointment}/user/${userId}`
       );
     } else {
-      return of([]);
+      console.error('User ID is undefined');
+      return of([]); 
     }
   }
 
@@ -77,6 +78,8 @@ export class AppointmentsService {
     const url = `${this.apiLinkAppointment}/${id}`;
     return this.http.put(url, updateAppointment);
   }
-
-  deleteAppointment(id: number) {}
+  
+  deleteAppointment(id: number): Observable<any> {
+    return this.http.delete(`${this.apiLinkAppointment}/${id}`);
+  }
 }

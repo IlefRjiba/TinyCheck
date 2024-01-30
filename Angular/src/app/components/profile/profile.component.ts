@@ -76,9 +76,22 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/updateAppointment']);
   }
 
-  deleteAppointment(appointment: Appointment): void {
-    console.log('delete appointment');
+  deleteAppointment(appointment: any): void {
+    this.appointmentService.deleteAppointment(appointment.id).subscribe({
+      next: () => {
+      
+        console.log('Appointment deleted successfully');
+        this.ngOnInit();
+        
+      },
+      error: (error) => {
+        console.error('There was an error deleting the appointment', error);
+      },
+    });
   }
+ 
+ 
+ 
   logout() {
     this.userService.logout();
     this.router.navigate(['/home']);
