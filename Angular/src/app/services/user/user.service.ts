@@ -24,7 +24,7 @@ export class UserService {
     return this.authStatusListener.asObservable();
   }
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem('token');
     if (!token) {
       return false;
     }
