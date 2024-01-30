@@ -93,6 +93,7 @@ export class UpdateAppointmentComponent {
         this.hourOfAppointment = this.rdv.time;
         const d = this.calendarService.returnDate(this.rdv.date, this.rdv.time);
         console.log(d)
+        this.dateOfAppointment = d.toISOString().split('T')[0];
       },
       error: (error) => {
         console.error('Error fetching patient information:', error);

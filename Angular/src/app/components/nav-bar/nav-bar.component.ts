@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class NavBarComponent implements OnInit {
   isLoggedIn: boolean = false;
-  email: string = ''; // Variable pour stocker l'email saisi par l'utilisateur
+  email: string = '';
   password: string = '';
   constructor(private userService: UserService
 
@@ -21,12 +21,9 @@ export class NavBarComponent implements OnInit {
   loginUser() {
     this.userService.signIn(this.email, this.password).subscribe(
       (response) => {
-        // Si la connexion est réussie, vous pouvez mettre à jour la variable isLoggedIn.
         this.isLoggedIn = true;
       },
       (error) => {
-        // Gérez les erreurs de connexion ici
-        console.error('Erreur de connexion : ', error);
       }
     );
   }

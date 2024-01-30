@@ -70,7 +70,7 @@ export class UserService {
         tap((response) => {
           if (response && response.access_token) {
             localStorage.setItem('token', response.access_token);
-            console.log(response.access_token);
+            // console.log(response.access_token);
             this.authStatusListener.next(true);
           }
         })

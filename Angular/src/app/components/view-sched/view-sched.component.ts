@@ -31,7 +31,6 @@ export class ViewSchedComponent implements OnInit {
 
   ngOnInit(): void {
     this.calendarService.events = []
-    // this.loadAppointments();
     this.events = this.calendarService.events;
     const currentUserId = this.userService.getCurrentUserId();
     if (currentUserId !== null && currentUserId !== 0) {
@@ -72,6 +71,7 @@ export class ViewSchedComponent implements OnInit {
         this.appointments.forEach((appointment) => {
           this.calendarService.addEvent(appointment, this.currentUserId);
         });
+        this.events = this.calendarService.events;
       },
       error: (err) => {
         console.error('Error fetching appointments:', err);
