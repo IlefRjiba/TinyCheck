@@ -1,6 +1,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
 <div class="Navcontainer">
 
@@ -36,7 +37,8 @@
                 <button type="button" class="btn  btn-signup" [routerLink]="['signUp']" routerLinkActive="up_active" *ngIf="!isLoggedIn">Sign Up</button>
               </span>
 
-                <img src="/assets/images/profile_pic.jpg" *ngIf="isLoggedIn" alt="profile pic">
+              <i class="fas fa-user-circle" *ngIf="isLoggedIn" style="font-size:24px;"></i>
+
             </ul>
         </div>
     </nav>

@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
   }
 
   loadAppointments(currentUserId: number): void {
-    if (currentUserId) {  
+    if (currentUserId) {
     this.appointmentService.getAppointmentsByUserId(currentUserId).subscribe({
         next: (data) => {
           this.appointments = data;
@@ -69,7 +69,7 @@ export class ProfileComponent implements OnInit {
     this.patientService.getPatientById(patientId).subscribe(patient => {
       this.patients[patientId] = patient; // Store the patient details
     });
-    
+
   }
   editAppointment(appointment: Appointment): void {
     console.log("edit appointment")
@@ -92,7 +92,9 @@ export class ProfileComponent implements OnInit {
  
  
   logout() {
-    console.log('logged out ');
-    }
+    this.userService.logout();
+    this.router.navigate(['/home']);
+    // Redirigez vers la page de connexion ou toute autre page appropriée
+}
 
 }

@@ -31,9 +31,11 @@ export class SignedInHomeComponent {
         }
       );
     }
-    
+
   }
   logout() {
-    console.log('logged out ');
-    }
+    this.userService.logout();
+    this.router.navigate(['/home']);
+    // Redirigez vers la page de connexion ou toute autre page appropriée
+}
 }
