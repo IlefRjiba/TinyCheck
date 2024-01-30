@@ -62,9 +62,8 @@ export class AppointmentsService {
     if (userId) {
       return this.http.get<Appointment[]>(`${this.apiLinkAppointment}/user/${userId}`);
     } else {
-      // Handle the error or return an empty observable
       console.error('User ID is undefined');
-      return of([]); // Returns an observable of an empty array
+      return of([]); 
     }
   }
 
@@ -72,7 +71,7 @@ export class AppointmentsService {
     
   }
   
-  deleteAppointment(id : number){
-    
+  deleteAppointment(id: number): Observable<any> {
+    return this.http.delete(`${this.apiLinkAppointment}/${id}`);
   }
 }
